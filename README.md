@@ -1,2 +1,2 @@
-Smart-campus---FabLab-and-Innovation
+Smart-campus: FabLab and Innovation
 ====================================
