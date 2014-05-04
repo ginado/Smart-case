@@ -19,9 +19,37 @@ String lireCommande(){
   }
 }  
 
+/* pour les capteurs 0,4,8 on envoie un signal sur le pin 22 
+       //            1,3,9                    //          23 
+      //             2,6,10                   //          24
+      //             3,7,11                   //          25
+      
+ On lit les valeurs reçues sur les entrées :
+ A0 pour les capteurs de 0 à 3
+ A1        //            4 à 7
+ A2        //            8 à 11
+                                                          */
 int lireCapteur (int numCapteur){
   Serial.println("On lit la valeur du capteur " + String(numCapteur));
-  return 1337;
+  int pin=22+numCapteur%4;
+  digitalWrite(pin, HIGH);
+  int in=numCapteur/4;
+  
+  switch (in){ 
+  case 0:
+     analogRead(A0);
+     break;
+  case 1:
+     analogRead(A1);
+     break;
+  case 2:
+     analogRead(A2);
+     break;
+  default :
+     Serial.println("erreur, mauvais numero de casier");
+  }
+  
+  digitalWrite(pin,LOW);
 }
 
 int ouvrirSerrure (int numSerrure){
@@ -36,6 +64,14 @@ int fermerSerrure (int numSerrure){
 
 String commandeLue;
 void setup(){
+  pinMode(22,OUTPUT);
+  pinMode(23,OUTPUT);
+  pinMode(24,OUTPUT);
+  pinMode(25,OUTPUT);
+  digitalWrite(22, LOW);
+  digitalWrite(23, LOW);
+  digitalWrite(24, LOW);
+  digitalWrite(25, LOW);
   Serial.begin(9600);
   commandeLue = "";
 }
