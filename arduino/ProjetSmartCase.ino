@@ -35,21 +35,22 @@ int lireCapteur (int numCapteur){
   digitalWrite(pin, HIGH);
   int in=numCapteur/4;
   
-  switch (in){ 
+  /*switch (in){ 
   case 0:
-     analogRead(A0);
+     analogRead(0);
      break;
   case 1:
-     analogRead(A1);
+     analogRead(A11);
      break;
   case 2:
      analogRead(A2);
      break;
   default :
      Serial.println("erreur, mauvais numero de casier");
-  }
-  
+  }*/
+  int valeurlue=analogRead(in);
   digitalWrite(pin,LOW);
+  return valeurlue;
 }
 
 int ouvrirSerrure (int numSerrure){
