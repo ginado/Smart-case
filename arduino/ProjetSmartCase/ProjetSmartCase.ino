@@ -53,6 +53,37 @@ int lireCapteur (int numCapteur){
   return valeurlue;
 }
 
+/*
+  On utilise un multiplexeur 12->1 (commande sur 4 bits) pour selectionner le capteur à lire. 
+   ArduinoMega(26..29) <--> CommandeMUX(0..3)
+        ArduinoMega(3) <--> SortieMUX(0)
+       ArduinoMega(30) <--> CapteursIN (0..11)
+    CapteursOUT(0..11) <--> EntreeMUX(0..11)
+ Resistance (470 Ohms) <--> GND
+ */
+int lireCapteurMux (int numCapteur){
+  //On ecrit la commande du multiplexeur (=numCapteur en binaire)
+  digitalWrite(26 , (numCapteur%2 == 1)?HIGH:LOW);
+  digitalWrite(27 , ((numCapteur/2)%2 == 1)?HIGH:LOW);
+  digitalWrite(28 , ((numCapteur/4)%2 == 1)?HIGH:LOW);
+  digitalWrite(29 , ((numCapteur/8)%2 == 1)?HIGH:LOW);
+
+  //On alimente les capteurs
+  digitalWrite(30, HIGH);
+
+  //On lit le resultat analogique
+  int res = analogRead(30);
+
+  //On arrete l'alimentation des capteur et du multiplexeur
+  digitalWrite(26, LOW);
+  digitalWrite(27, LOW);
+  digitalWrite(28, LOW);
+  digitalWrite(29, LOW);
+  digitalWrite(30, LOW);
+
+  return res;
+}
+
 int ouvrirSerrure (int numSerrure){
   Serial.println("On ouvre la serrure " + String(numSerrure));
   return 0;
