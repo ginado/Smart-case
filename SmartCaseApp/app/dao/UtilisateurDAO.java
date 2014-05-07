@@ -35,4 +35,12 @@ public class UtilisateurDAO {
         return user;
     }
 
+    
+    static public Utilisateur authentifierUtilisateur(String adresseMail, String hashPassword) throws SQLException{
+        Utilisateur user = getUtilisateur(adresseMail);
+        if(!hashPassword.equals(user.getHashPassword())){
+            user = null;
+        }
+        return user;        
+    }
 }

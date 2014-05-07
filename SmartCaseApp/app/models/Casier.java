@@ -39,6 +39,16 @@ public class Casier {
         return poids;
     }
     
+    @Override
+    public String toString(){
+        String s = "Casier n°"+idCasier+" Dimensions (h/l) : "+hauteur+" "+largeur;
+        if(estPlein)
+            s+=" Contient un objet de "+poids+" grammes.\n";
+        else
+            s+=" Ne contient pas d'objet.\n";
+        return s;
+    }
+    
     
 
 }
