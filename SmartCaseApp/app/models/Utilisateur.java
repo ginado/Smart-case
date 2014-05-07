@@ -5,22 +5,22 @@ package models;
  * @author bombrunt
  */
 public class Utilisateur {
-    private String adresse_mail;
+    private String adresseMail;
     private String prenom;
     private String nom;
-    private String hash_password;
+    private String hashPassword;
     private int credit;
 
     public Utilisateur(String adresse_mail, String prenom, String nom, String hash_password, int credit) {
-        this.adresse_mail = adresse_mail;
+        this.adresseMail = adresse_mail;
         this.prenom = prenom;
         this.nom = nom;
-        this.hash_password = hash_password;
+        this.hashPassword = hash_password;
         this.credit = credit;
     }
 
-    public String getAdresse_mail() {
-        return adresse_mail;
+    public String getAdresseMail() {
+        return adresseMail;
     }
 
     public String getPrenom() {
@@ -31,8 +31,8 @@ public class Utilisateur {
         return nom;
     }
 
-    public String getHash_password() {
-        return hash_password;
+    public String getHashPassword() {
+        return hashPassword;
     }
 
     public int getCredit() {
