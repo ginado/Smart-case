@@ -4,9 +4,9 @@ version := "1.0-SNAPSHOT"
 
 libraryDependencies ++= Seq(
   // Select Play modules
-  //jdbc,      // The JDBC connection pool and the play.api.db API
+  jdbc,      // The JDBC connection pool and the play.api.db API
   //anorm,     // Scala RDBMS Library
-  //javaJdbc,  // Java database API
+  javaJdbc,  // Java database API
   //javaEbean, // Java Ebean plugin
   //javaJpa,   // Java JPA plugin
   //filters,   // A set of built-in filters
