@@ -5,22 +5,22 @@ package models;
  * @author bombrunt
  */
 public class Casier {
-    private int id_casier;
+    private int idCasier;
     private int largeur;
     private int hauteur;
-    private boolean est_plein;
+    private boolean estPlein;
     private int poids;
 
-    public Casier(int id_casier, int largeur, int hauteur, boolean est_plein, int poids) {
-        this.id_casier = id_casier;
+    public Casier(int idCasier, int largeur, int hauteur, boolean estPlein, int poids) {
+        this.idCasier = idCasier;
         this.largeur = largeur;
         this.hauteur = hauteur;
-        this.est_plein = est_plein;
+        this.estPlein = estPlein;
         this.poids = poids;
     }
 
     public int getId_casier() {
-        return id_casier;
+        return idCasier;
     }
 
     public int getLargeur() {
@@ -31,8 +31,8 @@ public class Casier {
         return hauteur;
     }
 
-    public boolean isEst_plein() {
-        return est_plein;
+    public boolean estPlein() {
+        return estPlein;
     }
 
     public int getPoids() {
