@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
 import models.Casier;
+import play.db.DB;
 
 /**
  *
@@ -53,8 +54,5 @@ public class CasierDao {
         Statement st = conn.createStatement();
         st.executeUpdate("UPDATE casiers SET estPlein=0, poids=0 WHERE idCasier='" + idCasier +"'");
         conn.close();
-    }
-    
-    
-    
+    }    
 }
