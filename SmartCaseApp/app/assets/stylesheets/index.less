@@ -3,7 +3,6 @@ body{
   background-color: #a1bad1;
   background-image: url('/assets/images/greenPattern2.jpg');
   padding-top: 50px;
-  margin-top: 0px;
   margin:0px auto;
   border: none;
   background-size: cover;
@@ -25,10 +24,6 @@ body{
   
 }
 
-.pre_container{
- 	margin-top:50px;
- 	
-}
 
 .container{
    background-image: url('/assets/images/greensimple.jpg');
@@ -38,18 +33,19 @@ body{
 h1{
     color: red;
 }
+#description{
+ text-align: left;
+ margin-left:20px; 
+ margin-right: 20px; 
+ margin-top: 50px
 
+}
 #content{
   
    margin-top: 10px;
  }
  
- #inContent{
- padding-top: 10px; 
- 
- }
-
-
+S
 :focus {
 	outline: 0;
 }
@@ -57,8 +53,6 @@ h1{
 ol, ul {
 	list-style: none;
 }
-
-
 
 table {
 	border-collapse: separate;
@@ -101,12 +95,7 @@ float:right;
     margin:0;
     display: inline;
 }
-.required_notification {
-    color:#d45252;
-    margin:5px 0 0 0;
-    display:inline;
-    float:left;
-}
+
 .registration_form li:first-child, .registration_form li:last-child {
     border-bottom:1px solid #777;
 }
@@ -131,6 +120,22 @@ float:right;
 float:left;
 }
 
+/*--------------- LOGIN FORM ----------------
+---------------------------------------------
+*/
+
+#loginLabel{
+	display:inline-block;
+	float:left;
+	margin-right:5px;
+	font-size:20px;
+	text-shadow: 0 1px 0 grey;
+}
+
+#loginFont{
+	display: inline-block;
+	margin-left:20px;
+}
 
 /*--------------- NAVIGATION ----------------
 ---------------------------------------------
@@ -148,6 +153,13 @@ ul#navigation li a.home {
 ul#navigation li a.registration{
 				background:no-repeat;
 				margin-top:5px;
+				}
+ul#navigation li a.consulter{
+				background:no-repeat;
+				margin-top:5px;
+				}
+ul#navigation li a.consulter:hover {
+				background-position:top-right;
 				}
 ul#navigation li a.home:hover {
 				background-position:top-right;
