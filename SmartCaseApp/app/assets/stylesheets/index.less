@@ -1,24 +1,166 @@
 
 body{
   background-color: #a1bad1;
-  background-image: url('/assets/images/biggreen.png');
+  background-image: url('/assets/images/greenPattern2.jpg');
   padding-top: 50px;
   margin-top: 0px;
   margin:0px auto;
   border: none;
   background-size: cover;
+  font: 12px/18px Arial, Helvetica, sans-serif;
   
    -webkit-background-size: cover;
     -moz-background-size: cover;
     -o-background-size: cover;
 }
 
+#menuUl{
+  float:right;
+  margin-right:300px;
+}
+
+#menu li{
+  display: inline;
+  float:right;
+  
+}
+
+.pre_container{
+ 	margin-top:50px;
+ 	
+}
+
+.container{
+   background-image: url('/assets/images/greensimple.jpg');
+   margin-top:100px;
+   width: 1000px;
+}
 h1{
     color: red;
 }
 
 #content{
-   background-color: white;
-   background-image: url('/assets/images/greensimple.jpg');
   
+   margin-top: 10px;
+ }
+ 
+ #inContent{
+ padding-top: 10px; 
+ 
+ }
+
+
+:focus {
+	outline: 0;
 }
+
+ol, ul {
+	list-style: none;
+}
+
+
+
+table {
+	border-collapse: separate;
+	border-spacing: 0;
+}
+caption, th, td {
+	text-align: left;
+	font-weight: normal;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: "";
+}
+blockquote, q {
+	quotes: "" "";
+}
+
+/* registration form*/
+
+.registration_form{
+display:inline-block;
+float:right;
+
+}
+
+.registration_form ul {
+    width:450px;
+    list-style-type:none;
+    list-style-position:outside;
+    margin:0px;
+    padding:0px;
+}
+.registration_form li{
+    padding:12px;
+    border-bottom:1px solid #eee;
+    position:relative;
+}
+
+.registration_form h2 {
+    margin:0;
+    display: inline;
+}
+.required_notification {
+    color:#d45252;
+    margin:5px 0 0 0;
+    display:inline;
+    float:left;
+}
+.registration_form li:first-child, .registration_form li:last-child {
+    border-bottom:1px solid #777;
+}
+.registration_form label {
+    width:150px;
+    margin-top: 3px;
+    display:inline-block;
+    float:left;
+    padding:3px;
+}
+
+
+.registration_form input {
+    height:20px;
+    width:220px;
+    padding:5px 8px;
+}
+.registration_form textarea {padding:8px; width:300px;}
+.registration_form button {margin-left:156px;}
+
+.submitFormButton{
+float:left;
+}
+
+
+/*--------------- NAVIGATION ----------------
+---------------------------------------------
+*/
+
+ul#navigation li a {
+			display: block;
+			width: 74px;
+			height: 80px;
+			}
+ul#navigation li a.home {
+				background: no-repeat;
+				margin-bottom: 0px;
+				}
+ul#navigation li a.registration{
+				background:no-repeat;
+				margin-top:5px;
+				}
+ul#navigation li a.home:hover {
+				background-position:top-right;
+				}
+ul#navigation li a.registration:hover {
+				background-position:top-right;
+				}
+
+ul#navigation li a img {
+			list-style: none;
+			background: none;
+			border: none;
+			margin-right: 10px;
+			padding: 5px;
+		}
+

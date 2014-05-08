@@ -21,7 +21,8 @@ public class MainController extends Controller {
         } catch (SQLException ex) {
             return ok(views.html.index.render(ex.getMessage()));
         }
-        return ok(views.html.index.render("Hello from " + user.getPrenom()));
+        return ok(views.html.index.render(" "));
+       // return ok(views.html.index.render("Hello from " + user.getPrenom()));
     }
     
 }
