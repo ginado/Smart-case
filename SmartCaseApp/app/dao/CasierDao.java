@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Collection;
 import models.Casier;
 import play.db.DB;
@@ -14,11 +15,11 @@ import play.db.DB;
  * @author bombrunt
  */
 public class CasierDao {
-    static public Collection<Casier> getCasiers() throws SQLException {
+    static public List<Casier> getCasiers() throws SQLException {
         DB db = new DB();
         Connection conn = db.getConnection();
         ResultSet rsCasier;
-        Collection<Casier> listeCasier = new ArrayList();
+        List<Casier> listeCasier = new ArrayList();
         Statement st = conn.createStatement();
         st.executeQuery("SELECT idCasier,largeur,hauteur,estPlein,poids FROM casiers");
         rsCasier = st.getResultSet();
