@@ -1,0 +1,34 @@
+@(casiers: java.util.List[Casier])
+
+  @main("Vue d'ensemble des casiers"){
+
+    <head>
+      <style>
+      table,th,td
+      {
+       border:1px solid black;
+       border-collapse:collapse;
+      }
+      th,td
+      {
+       padding:5px;
+      }
+      </style>
+    </head>
+
+      <table style="width:300px">
+      <tr>
+      <th>Numero du Casier</th>
+      <th>Largeur</th>		
+      <th>Hauteur</th>
+      </tr>
+      @for(casier <- casiers){
+
+	<tr>
+	  <td>@casier.getId_casier()</td>
+	  <td>@casier.getLargeur()</td>		
+	  <td>@casier.getHauteur()</td>
+	  </tr>
+      }
+    </table>
+  }
