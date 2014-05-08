@@ -3,6 +3,7 @@
 # ~~~~
 
 GET     /                           controllers.MainController.index()
+GET     /casiers                    controllers.MainController.index2()
 GET     /message                    controllers.MessageController.getMessage()
 GET     /assets/javascripts/routes  controllers.MessageController.javascriptRoutes()
 

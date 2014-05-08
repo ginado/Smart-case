@@ -10,38 +10,47 @@ import java.sql.Date;
 
 
 public class Transaction {
-    private int id_transaction;
-    private Date date_trans;
-    private TypeTransaction type_trans;
+    private int idTransaction;
+    private Date dateTrans;
+    private TypeTransaction typeTrans;
     private String utilisateur;
-    private int id_casier;
+    private int idCasier;
 
-    public Transaction(int id_transaction, Date date_trans, String type_trans, String utilisateur, int id_casier) {
-        this.id_transaction = id_transaction;
-        this.date_trans = date_trans;
-        this.type_trans = TypeTransaction.valueOf(type_trans.toUpperCase());
+    public Transaction(int idTransaction, Date dateTrans, String typeTrans, String utilisateur, int idCasier) {
+        this.idTransaction = idTransaction;
+        this.dateTrans = dateTrans;
+        this.typeTrans = TypeTransaction.valueOf(typeTrans.toUpperCase().trim());
         this.utilisateur = utilisateur;
-        this.id_casier = id_casier;
+        this.idCasier = idCasier;
     }
 
-    public int getId_transaction() {
-        return id_transaction;
+    public int getIdTransaction() {
+        return idTransaction;
     }
 
-    public Date getDate_trans() {
-        return date_trans;
+    public Date getDateTrans() {
+        return dateTrans;
     }
 
-    public TypeTransaction getType_trans() {
-        return type_trans;
+    public TypeTransaction getTypeTrans() {
+        return typeTrans;
     }
 
     public String getUtilisateur() {
         return utilisateur;
     }
 
-    public int getId_casier() {
-        return id_casier;
-    }   
+    public int getIdCasier() {
+        return idCasier;
+    }
+    
+    @Override
+    public String toString(){
+        return "Transaction n° : "+idTransaction+
+                " Effectué le "+dateTrans.toString()+
+                " Par "+utilisateur+
+                " De type "+typeTrans+
+                " Sur le casier n° :"+idCasier+"\n";
+    }
     
 }
