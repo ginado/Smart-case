@@ -19,7 +19,7 @@ public class Transaction {
     public Transaction(int idTransaction, Date dateTrans, String typeTrans, String utilisateur, int idCasier) {
         this.idTransaction = idTransaction;
         this.dateTrans = dateTrans;
-        this.typeTrans = TypeTransaction.valueOf(typeTrans.toUpperCase());
+        this.typeTrans = TypeTransaction.valueOf(typeTrans.toUpperCase().trim());
         this.utilisateur = utilisateur;
         this.idCasier = idCasier;
     }
