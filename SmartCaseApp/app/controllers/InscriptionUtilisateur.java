@@ -24,6 +24,8 @@ public class InscriptionUtilisateur extends Controller {
         String adresseMail = requestData.get("adresseMail");
         String prenom = requestData.get("prenom");
         String nom = requestData.get("nom");
+        if(requestData.get("password_confirmation").compareTo(requestData.get("password"))!=0)
+            return ok(views.html.error.render("Veuillez verifiez la saisie de votre mot de passe."));
         String hashpassword = null;
         try {
             byte[] bytesOfMessage = requestData.get("password").getBytes("UTF-8");
