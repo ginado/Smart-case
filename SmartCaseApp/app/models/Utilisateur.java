@@ -39,6 +39,10 @@ public class Utilisateur {
         return credit;
     }
     
+    public String toString() {
+        return adresseMail+" "+prenom+" "+nom+" "+credit;
+    }
+    
     
     
 }
