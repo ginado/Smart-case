@@ -2,37 +2,47 @@
 
 	<div id="content" style="padding: 20px;float:right">
 		<div style="display:inline-block;">
-		 <form class="registration_form" action="NomFichierpanamea" method="post" name="registration_form">
-        		<ul>
-   		 <li>
-         <h2>Registration</h2> <br>
-         <span class="required_notification">* Denotes Required Field</span>
-         <br>
-   		 </li>
-         <li>
-        <label for="name">Name*:</label>
-        <input type="text" name="name" />
-        </li>
-        <li>
-    	<label for="email">Email*:</label>
-    	<input type="text" name="email" />
-	    <span class="form_hint"></span>
-  		</li>
-  		<li>
-    	<label for="password">Password*:</label>
-    	<input type="password" name="password" />
-    	</li>
-    	<li>
-    	<label for="password">ConfirmPassword*:</label>
-    	<input type="password" name="password" />
-    	</li>
-    	<li>
-   		 <button class="submit" type="submit" class="submitFormButton">Submit Form</button>
-   		 Already registered? Login!
-		</li>
+		<form class="registration_form" action="/inscription" method="post" name="registration_form">
+                <ul>
+                    <li>
+                        <h2>Registration</h2> <br>
+                        <span class="required_notification">* Denotes Required Field</span>
+                        <br>
+                    </li>
+                    
+                    <li>
+                        <label for="prenom">Prenom*:</label>
+                        <input type="text" name="prenom" />
+                    </li>
+                    
+                    <li>
+                        <label for="nom">Nom*:</label>
+                        <input type="text" name="nom" />
+                    </li>
+                    
+                    <li>
+                        <label for="adresseMail">Email*:</label>
+                        <input type="text" name="adresseMail" />
+                        <span class="form_hint"></span>
+                    </li>
+  		
+                    <li>
+                        <label for="password">Password*:</label>
+                        <input type="password" name="password" />
+                    </li>
+    	
+                    <li>
+                        <label for="password">ConfirmPassword*:</label>
+                        <input type="password" name="password" />
+                    </li>
+                    
+                    <li>
+                        <button class="submit" type="submit" class="submitFormButton">Submit Form</button>
+                        Already registered? Login!
+                    </li>
     
-</ul>
+                </ul>
 		</form>
 		</div>
-		</div>
+	</div>
 }
