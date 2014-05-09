@@ -48,7 +48,7 @@ public class UtilisateurDAO {
     static public void ajouterUtilisateur(Utilisateur utilisateur) throws SQLException {
         Connection conn = DB.getConnection();
         Statement st = conn.createStatement();
-        st.execute("INSERT INTO Utilisateurs VALUES ("+utilisateur.getAdresseMail()+","+utilisateur.getPrenom()+","+utilisateur.getNom()+","+utilisateur.getHashPassword()+","+utilisateur.getCredit()+")");
+        st.executeUpdate("INSERT INTO Utilisateurs VALUES ('"+utilisateur.getAdresseMail()+"','"+utilisateur.getPrenom()+"','"+utilisateur.getNom()+"','"+utilisateur.getHashPassword()+"',"+utilisateur.getCredit()+")");
         conn.close();
     }
     
