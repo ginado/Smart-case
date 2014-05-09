@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Utilisateur;
@@ -43,4 +44,12 @@ public class UtilisateurDAO {
         }
         return user;        
     }
+    
+    static public void ajouterUtilisateur(Utilisateur utilisateur) throws SQLException {
+        Connection conn = DB.getConnection();
+        Statement st = conn.createStatement();
+        st.execute("INSERT INTO Utilisateurs VALUES ("+utilisateur.getAdresseMail()+","+utilisateur.getPrenom()+","+utilisateur.getNom()+","+utilisateur.getHashPassword()+","+utilisateur.getCredit()+")");
+        conn.close();
+    }
+    
 }
