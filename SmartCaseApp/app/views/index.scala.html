@@ -19,22 +19,24 @@
 
 <div style="display:inline-block; float:left;">
 		<h3 id="loginFont">Login</h3> <br>
-		 <form class="login_form" action="NomFichierpanamea" method="post" name="login_form">
- 	<ul style="position: top-left;margin-left:20px; margin-right:10px">
+	<form class="login_form" action="/authentification" method="post" name="login_form">
+ 		<ul style="position: top-left;margin-left:20px; margin-right:10px">
          
-        <li style="display:inline">
-        <label for="name" id="loginLabel">Username*:</label>
-        <input type="text" name="name" />
-        </li>
-  		<li>
-    	<label for="password" id="loginLabel">Password* :</label>
-    	<input type="password" name="password" />
-    	</li>
-    	<button class="submit" type="submit" class="loginFormButton">Login</button>
-	</li>
+        		<li style="display:inline">
+        			<label for="name" id="loginLabel">Adresse mail*:</label>
+       				<input type="text" name="adresseMail" />
+        		</li>
+
+ 			<li>
+    				<label for="password" id="loginLabel">Mot de passe* :</label>
+    				<input type="password" name="password" />
+    			</li>
+    			<li>
+				<button class="submit" type="submit" class="loginFormButton">Login</button>
+			</li>
     
-</ul>
-		</form>
+		</ul>
+	</form>
 				
 		</div>
 		
