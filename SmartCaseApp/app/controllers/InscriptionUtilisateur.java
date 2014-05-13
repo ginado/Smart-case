@@ -26,17 +26,7 @@ public class InscriptionUtilisateur extends Controller {
         String nom = requestData.get("nom");
         if(requestData.get("password_confirmation").compareTo(requestData.get("password"))!=0)
             return ok(views.html.error.render("Veuillez verifiez la saisie de votre mot de passe."));
-        String hashpassword = null;
-        try {
-            byte[] bytesOfMessage = requestData.get("password").getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] thedigest = md.digest(bytesOfMessage);
-            hashpassword=thedigest.toString();    
-        } catch (UnsupportedEncodingException unsupportedEncodingException) {
-            return internalServerError();
-        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-            return internalServerError();
-        }
+        String hashpassword=Security.crypt(requestData.get("adresseMail"));
                 
         Utilisateur utilisateur = new Utilisateur(adresseMail, prenom, nom, hashpassword, 0);
         try {        
@@ -44,8 +34,8 @@ public class InscriptionUtilisateur extends Controller {
         } catch (SQLException ex) {
             return ok(views.html.error.render("L'adresse \""+utilisateur.getAdresseMail()+"\" a déja été utilisé pour créer un compte."));
         }
-        SessionManager.addSession("utilisateur", utilisateur);
-        return redirect("/");
+        SessionManager.addSession("utilisateur", utilisateur.getAdresseMail());
+        return redirect("/main");
     }
     
     public static Result getFormulaire() {

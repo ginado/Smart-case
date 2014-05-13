@@ -13,6 +13,7 @@ import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.internalServerError;
+import static play.mvc.Results.ok;
 import static play.mvc.Results.redirect;
 
 /**
@@ -24,25 +25,18 @@ public class Authentification extends Controller {
     public static Result authentifier(){
         DynamicForm requestData = Form.form().bindFromRequest();
         String adresseMail = requestData.get("adresseMail");
-        String hashpassword = null;
-        try {
-            byte[] bytesOfMessage = requestData.get("password").getBytes("UTF-8");
-            MessageDigest md = MessageDigest.getInstance("MD5");
-            byte[] thedigest = md.digest(bytesOfMessage);
-            hashpassword=thedigest.toString();
-        } catch (UnsupportedEncodingException unsupportedEncodingException) {
-            return internalServerError();
-        } catch (NoSuchAlgorithmException noSuchAlgorithmException) {
-            return internalServerError();
-        }
+        String hashpassword=Security.crypt(requestData.get("password"));
         Utilisateur utilisateur;
         try {
             utilisateur=UtilisateurDAO.authentifierUtilisateur(adresseMail, hashpassword);
         } catch (SQLException ex) {
+            return ok(views.html.error.render("Aucun compte ayant comme email : \""+adresseMail+"\"."));
+        }
+        if(utilisateur==null) {
             return ok(views.html.error.render("Mauvais mot de passe pour : \""+adresseMail+"\"."));
         }
-        SessionManager.addSession("utilisateur", utilisateur);
-        return redirect("/");
+        SessionManager.addSession("utilisateur", utilisateur.getAdresseMail());
+        return redirect("/main");
     }
     
 }

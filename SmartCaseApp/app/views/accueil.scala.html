@@ -1,0 +1,21 @@
+@(utilisateur : Utilisateur)
+
+@main("Welcome to Smart Case! (E)Change le monde!") {
+
+<h1>Bonjour @utilisateur.getPrenom() !</h1>
+Vous avez @utilisateur.getCredit() crédits.
+
+<form action="/echangerchoix">
+    <input type="submit" value="Echanger un objet">
+</form>
+
+<form action="/retirerchoix">
+    <input type="submit" value="Retirer un objet">
+</form>
+
+<form action="/deposer">
+    <input type="submit" value="Deposer un objet">
+</form>
+
+
+}

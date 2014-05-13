@@ -19,7 +19,7 @@ public class Casier {
         this.poids = poids;
     }
 
-    public int getId_casier() {
+    public int getIdCasier() {
         return idCasier;
     }
 
