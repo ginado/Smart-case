@@ -51,5 +51,13 @@ public class UtilisateurDAO {
         st.executeUpdate("INSERT INTO Utilisateurs VALUES ('"+utilisateur.getAdresseMail()+"','"+utilisateur.getPrenom()+"','"+utilisateur.getNom()+"','"+utilisateur.getHashPassword()+"',"+utilisateur.getCredit()+")");
         conn.close();
     }
+
+    public static void ajouterCredit(String utlisateur, int i) throws SQLException {
+        Connection conn = DB.getConnection();
+        Statement st = conn.createStatement();
+        st.executeUpdate("UPDATE Utilisateurs SET credit=credit+1 WHERE adresseMail="+utlisateur);
+        conn.close();
+        
+    }
     
 }

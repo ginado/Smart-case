@@ -56,4 +56,26 @@ public class CasierDao {
         st.executeUpdate("UPDATE casiers SET estPlein=0, poids=0 WHERE idCasier='" + idCasier +"'");
         conn.close();
     }    
+
+    public static Casier getCasier(String idCasier) throws SQLException {
+        DB db = new DB();
+        Casier c = null;
+        Connection conn = db.getConnection();
+        Statement st = conn.createStatement();
+        ResultSet rsCasier = st.executeQuery("SELECT  largeur,hauteur,estPlein,poids FROM casiers WHERE idCasier='"+idCasier+"'");
+        if(rsCasier.next()) {
+            Boolean estPlein = true;
+            if(rsCasier.getInt("estPlein")==0)
+                estPlein = false;
+            c = new Casier(
+                    Integer.parseInt(idCasier),
+                    rsCasier.getInt("largeur"),
+                    rsCasier.getInt("hauteur"),
+                    estPlein,
+                    rsCasier.getInt("poids"));
+            
+            conn.close();
+        }
+        return c;
+    }
 }

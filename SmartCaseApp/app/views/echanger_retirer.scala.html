@@ -1,0 +1,6 @@
+@(utilisateur : Utilisateur , casier : Casier, isEchange : Boolean)
+
+@main(""){
+Vous pouvez maintenant @if(isEchange){echanger votre objet avec}else{recuperer} l'objet dans le casier n°@casier.getIdCasier().
+<a href='/@if(isEchange){echanger}else{retirer}fin'>C'est fait !</a>
+}

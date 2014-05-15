@@ -1,12 +1,14 @@
 package controllers;
 
 import dao.CasierDao;
+import dao.UtilisateurDAO;
 import java.sql.SQLException;
 import java.util.Collection;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Casier;
+import models.Utilisateur;
 import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
@@ -45,6 +47,11 @@ public class Deposer extends Controller{
     public static Result deposerFin(){
         try {
             CasierDao.remplirCasier(Integer.parseInt(SessionManager.get("casier")),100);
+            try {
+                UtilisateurDAO.ajouterCredit(SessionManager.get("utilisateur"),1);
+            } catch (SQLException ex) {
+                return ok(views.html.error.render("Erreur interne."));
+            }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne."));
         }
