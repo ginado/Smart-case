@@ -34,10 +34,14 @@ public class Echanger extends Controller {
         Utilisateur utilisateur =null;
         try {
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            if(Casier.allAreEmpty(casiers)) {
+                return ok(views.html.accueil.render(utilisateur,"Tout les casiers sont vides, impossible d'échanger un objet"));
+            } else {
+                return ok(views.html.echanger_retirer_choix.render(utilisateur,casiers,true));
+            }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne."));
         }
-        return ok(views.html.echanger_retirer_choix.render(utilisateur,casiers,true));
     }
     
     static public Result echanger(String idCasier) {

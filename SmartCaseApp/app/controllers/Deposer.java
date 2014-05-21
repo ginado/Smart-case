@@ -15,6 +15,7 @@ import models.Casier;
 import models.Transaction;
 import models.Utilisateur;
 import play.mvc.Controller;
+import play.mvc.Http;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
 
@@ -42,7 +43,13 @@ public class Deposer extends Controller{
         }
         
         if(casierLibre==null) {
-            return ok(views.html.error.render("Tout les casiers sont occupés, désolé :) ."));
+            Utilisateur utilisateur;
+            try {
+                utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            } catch (SQLException ex) {
+                return ok(views.html.error.render("Erreur interne"));
+            }
+            return ok(views.html.accueil.render(utilisateur,"Tous les casiers sont pleins, impossible de déposer un objet."));
         } else {
             SessionManager.addSession("casier",String.valueOf(casierLibre.getIdCasier()));
             return ok(views.html.deposer.render(casierLibre));

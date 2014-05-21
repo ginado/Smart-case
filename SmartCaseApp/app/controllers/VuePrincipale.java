@@ -21,7 +21,7 @@ public class VuePrincipale extends Controller {
         } catch (SQLException ex) {
             return(ok(views.html.error.render("Erreur interne.")));
         }
-        return ok(views.html.accueil.render(utilisateur));
+        return ok(views.html.accueil.render(utilisateur,""));
     }
     
 }

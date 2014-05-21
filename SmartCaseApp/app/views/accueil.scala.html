@@ -1,10 +1,11 @@
-@(utilisateur : Utilisateur)
+@(utilisateur : Utilisateur,message : String)
 
 @main("Smart Case") {
 <a href="/logout" class="btn">Se déconnecter</a>
 
 <h1>Bonjour @utilisateur.getPrenom() !</h1>
 <p>Vous avez @utilisateur.getCredit() crédits.</p>
+<p>@message</p>
 
 <div class="btn-group">
     <a href="/echangerchoix" class="btn btn-default btn-xlarge active" role="button">Echanger un objet</a>

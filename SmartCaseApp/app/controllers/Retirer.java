@@ -34,13 +34,17 @@ Collection<Casier> casiers;
         Utilisateur utilisateur =null;
         try {
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            if(utilisateur==null || utilisateur.getCredit()<=0) {
+                return ok(views.html.accueil.render(utilisateur,"Vous n'avez pas assez de crédit. Déposez des objets pour augmenter cotre solde de points."));
+            }
+            if(Casier.allAreEmpty(casiers)) {
+                return ok(views.html.accueil.render(utilisateur,"Tout les casiers sont vides, impossible de retirer un objet"));
+            } else {
+                return ok(views.html.echanger_retirer_choix.render(utilisateur,casiers,false));
+            }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne."));
-        }
-        if(utilisateur==null || utilisateur.getCredit()<=0) {
-            return ok(views.html.error.render("Vous n'avez pas assez de crédit. Déposez des objets pour augmenter cotre solde de points."));
-        }
-        return ok(views.html.echanger_retirer_choix.render(utilisateur,casiers,false));
+        }        
     }
     
    static public Result retirer(String idCasier) {
