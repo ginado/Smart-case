@@ -45,7 +45,10 @@ public class TransactionDao {
         st.setDate(1,new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
         st.setString(2,transaction.getTypeTrans().name().toLowerCase());
         st.setString(3,transaction.getUtilisateur());
-        st.setInt(4,transaction.getIdCasier());
+        if(transaction.getIdCasier()==-1)
+            st.setNull(4,java.sql.Types.INTEGER);
+        else
+            st.setInt(4,transaction.getIdCasier());
 	st.executeUpdate();
         conn.close();
     }  
