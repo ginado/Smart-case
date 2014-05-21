@@ -1,47 +1,39 @@
-@main("Registration"){
+@main("Smart Case"){
 
 	<div id="content" style="padding: 20px;float:right">
 		<div style="display:inline-block;">
-		<form class="registration_form" action="/inscription" method="post" name="registration_form">
-                <ul>
-                    <li>
-                        <h2>Registration</h2> <br>
-                        <span class="required_notification">* Denotes Required Field</span>
-                        <br>
-                    </li>
+		<form form="form" class="registration_form" action="/inscription" method="post" name="registration_form">
                     
-                    <li>
-                        <label for="prenom">Prenom*:</label>
-                        <input type="text" name="prenom" />
-                    </li>
+                    <h2>Registration</h2>
                     
-                    <li>
-                        <label for="nom">Nom*:</label>
-                        <input type="text" name="nom" />
-                    </li>
+                    <div class="form-group">
+                        <label for="prenom">Prenom :</label>
+                        <input type="text" name="prenom" required />
+                    </div>
                     
-                    <li>
-                        <label for="adresseMail">Email*:</label>
-                        <input type="text" name="adresseMail" />
-                        <span class="form_hint"></span>
-                    </li>
+                    <div class="form-group">
+                        <label for="nom">Nom :</label>
+                        <input type="text" name="nom" required/>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="adresseMail">Email :</label>
+                        <input type="email" name="adresseMail" required />
+                    </div>
   		
-                    <li>
-                        <label for="password">Password*:</label>
-                        <input type="password" name="password" />
-                    </li>
+                    <div class="form-group">
+                        <label for="password">Mot de Passe :</label>
+                        <input type="password" name="password" required/>
+                    </div>
     	
-                    <li>
-                        <label for="password_confirmation">ConfirmPassword*:</label>
-                        <input type="password" name="password_confirmation" />
-                    </li>
+                    <div class="form-group">
+                        <label for="password_confirmation">Confirmation du Mot de Passe :</label>
+                        <input type="password" name="password_confirmation" required/>
+                    </div>
                     
-                    <li>
+                    <div class="form-group">
                         <button class="submit" type="submit" class="submitFormButton">Submit Form</button>
-                        Already registered? Login!
-                    </li>
-    
-                </ul>
+                    </div>
 		</form>
 		</div>
 	</div>

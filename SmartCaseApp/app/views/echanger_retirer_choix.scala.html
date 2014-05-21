@@ -1,30 +1,36 @@
 @(utilisateur : Utilisateur,casiers : java.util.Collection[Casier],isEchange : Boolean)
 
-  @main("Vue d'ensemble des casiers"){
+  @main("Smart Case"){
+      @if(Casier.allAreEmpty(casiers)){
+          <p>Désolé, tout les casiers sont vides pour le moment.
+          Voulez vous <a href="/deposer">déposer</a> un objet ?</p>
+      } else {
       Voici l'emsemble des casiers @utilisateur.getPrenom(). Les casiers plein sont en rouge.
       Choisissez le casier @if(isEchange){avec lequel vous voulez echanger}else{dont vous voulez récuperer}  le contenu.
-      <table style="width:300px">
+      <table class="table table-hover ">
+      <thead>
       <tr>
-      <th>Numero du Casier</th>
-      <th></th>
+          Numero du Casier
       </tr>
-      @for(casier <- casiers){
-	<tr>
-            @if(casier.estPlein()) {
-                <td style="color: red">@casier.getIdCasier()</td>
-            } else {
-                <td>@casier.getIdCasier()</td>
-            }
-            <td>
-            @if(casier.estPlein()){
-               @if(isEchange){
-                 <a href="/echanger/@casier.getIdCasier()">Echanger</a>
-               } else {
-                 <a href="/retirer/@casier.getIdCasier()">Retirer</a>
-               }
-            }
-            </td>
-         </tr>
-      }
+      </thead>
+          @for(casier <- casiers){
+            <tr>
+                @if(casier.estPlein()) {
+                    <td style="color: red">@casier.getIdCasier()</td>
+                } else {
+                    <td>@casier.getIdCasier()</td>
+                }
+                <td>
+                @if(casier.estPlein()){
+                   @if(isEchange){
+                     <a href="/echanger/@casier.getIdCasier()" class="btn btn-default">Echanger</a>
+                   } else {
+                     <a href="/retirer/@casier.getIdCasier()" class="btn btn-default">Retirer</a>
+                   }
+                }
+                </td>
+             </tr>
+          }
     </table>
+    }
   }
