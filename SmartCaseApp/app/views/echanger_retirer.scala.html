@@ -1,6 +1,7 @@
 @(utilisateur : Utilisateur , casier : Casier, isEchange : Boolean)
 
 @main("Smart Case"){
+<a href="/logout" class="btn">Se déconnecter</a>
 Vous pouvez maintenant @if(isEchange){echanger votre objet avec}else{recuperer} l'objet dans le casier n°@casier.getIdCasier().
 <a href='/@if(isEchange){echanger}else{retirer}fin/@casier.getIdCasier()' class="btn btn-default">C'est fait !</a>
 }

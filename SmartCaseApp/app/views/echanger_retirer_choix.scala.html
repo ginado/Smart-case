@@ -1,6 +1,7 @@
 @(utilisateur : Utilisateur,casiers : java.util.Collection[Casier],isEchange : Boolean)
 
   @main("Smart Case"){
+      <a href="/logout" class="btn">Se déconnecter</a>
       @if(Casier.allAreEmpty(casiers)){
           <p>Désolé, tout les casiers sont vides pour le moment.
           Voulez vous <a href="/deposer">déposer</a> un objet ?</p>
@@ -10,7 +11,7 @@
       <table class="table table-hover ">
       <thead>
       <tr>
-          Numero du Casier
+          <th>Numero du Casier</th>
       </tr>
       </thead>
           @for(casier <- casiers){
