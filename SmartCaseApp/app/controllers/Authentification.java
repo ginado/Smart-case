@@ -1,5 +1,7 @@
 package controllers;
 
+import utils.Security;
+import utils.SessionManager;
 import dao.UtilisateurDAO;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;

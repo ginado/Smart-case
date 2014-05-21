@@ -1,12 +1,17 @@
 package controllers;
 
+import utils.SessionManager;
 import dao.CasierDao;
+import dao.TransactionDao;
 import dao.UtilisateurDAO;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Casier;
+import models.Transaction;
 import models.Utilisateur;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -47,7 +52,15 @@ public class Echanger extends Controller {
         return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
     }
     
-    static public Result echangerFin() {
+    static public Result echangerFin(String idCasier) {
+        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
+        int id = Integer.parseInt(SessionManager.get("casier"));
+        try {
+            TransactionDao.ajouterTransaction(new Transaction(0, date,"echange",SessionManager.get("utilisateur"),id));
+            CasierDao.remplirCasier(id,200);
+        } catch (SQLException ex) {
+            return ok(views.html.error.render("Erreur interne."));
+        }
         return redirect("/main");
     }
 }

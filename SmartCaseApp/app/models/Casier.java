@@ -1,5 +1,8 @@
 package models;
 
+import java.util.Collection;
+import java.util.Iterator;
+
 /**
  *
  * @author bombrunt
@@ -39,6 +42,8 @@ public class Casier {
         return poids;
     }
     
+    
+    
     @Override
     public String toString(){
         String s = "Casier n°"+idCasier+" Dimensions (h/l) : "+hauteur+" "+largeur;
@@ -49,6 +54,17 @@ public class Casier {
         return s;
     }
     
+    public static boolean allAreEmpty(Collection<Casier> casiers){
+        Casier casier;
+        for(Iterator<Casier> it = casiers.iterator(); it.hasNext();){
+            casier=it.next();
+            if(casier.estPlein) {
+                return false;
+            }
+        }
+        return true;
+        
+    }
     
 
 }

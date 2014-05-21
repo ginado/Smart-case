@@ -52,10 +52,10 @@ public class UtilisateurDAO {
         conn.close();
     }
 
-    public static void ajouterCredit(String utlisateur, int i) throws SQLException {
+    public static void ajouterCredit(String utilisateur, int i) throws SQLException {
         Connection conn = DB.getConnection();
         Statement st = conn.createStatement();
-        st.executeUpdate("UPDATE Utilisateurs SET credit=credit+1 WHERE adresseMail="+utlisateur);
+        st.executeUpdate("UPDATE Utilisateurs SET credit=credit+"+i+" WHERE adresseMail='"+utilisateur+"'");
         conn.close();
         
     }

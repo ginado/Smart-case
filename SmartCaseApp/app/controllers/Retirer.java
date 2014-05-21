@@ -1,13 +1,18 @@
 package controllers;
 
+import utils.SessionManager;
 import dao.CasierDao;
+import dao.TransactionDao;
 import dao.UtilisateurDAO;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Casier;
+import models.Transaction;
 import models.Utilisateur;
 import play.mvc.Controller;
 import play.mvc.Result;
@@ -50,8 +55,12 @@ Collection<Casier> casiers;
         return ok(views.html.echanger_retirer.render(utilisateur,casier,false));
     }
    
-   static public Result retirerFin() {
+   static public Result retirerFin(String idCasier) {
+       java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
+       int id = Integer.parseInt(idCasier);
         try {
+            TransactionDao.ajouterTransaction(new Transaction(0, date,"retrait",SessionManager.get("utilisateur"),id));
+            CasierDao.viderCasier(id);
             UtilisateurDAO.ajouterCredit(SessionManager.get("utilisateur"),-1);
         } catch (SQLException ex) {
             Logger.getLogger(Retirer.class.getName()).log(Level.SEVERE, null, ex);

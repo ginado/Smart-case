@@ -55,8 +55,8 @@ public class CasierDao {
         Statement st = conn.createStatement();
         st.executeUpdate("UPDATE casiers SET estPlein=0, poids=0 WHERE idCasier='" + idCasier +"'");
         conn.close();
-    }    
-
+    }
+    
     public static Casier getCasier(String idCasier) throws SQLException {
         DB db = new DB();
         Casier c = null;

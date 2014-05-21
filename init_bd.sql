@@ -31,7 +31,8 @@ CREATE TABLE transactions (
         CHECK (typeTrans='depot' 
             OR typeTrans='retrait' 
             OR typeTrans='connexion' 
-            OR typeTrans='deconnexion'),
+            OR typeTrans='deconnexion'
+            OR typeTrans='echange'),
     CONSTRAINT transactions_casier
         FOREIGN KEY (idCasier) REFERENCES casiers (idCasier),
     CONSTRAINT transactions_utilisateur

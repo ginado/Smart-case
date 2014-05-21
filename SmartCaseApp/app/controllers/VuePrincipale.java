@@ -1,5 +1,6 @@
 package controllers;
 
+import utils.SessionManager;
 import dao.UtilisateurDAO;
 import java.sql.SQLException;
 import java.util.logging.Level;
