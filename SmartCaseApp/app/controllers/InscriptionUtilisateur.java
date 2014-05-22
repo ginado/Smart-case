@@ -1,19 +1,14 @@
 package controllers;
 
-import utils.Security;
-import utils.SessionManager;
 import dao.UtilisateurDAO;
-import java.io.UnsupportedEncodingException;
+import java.sql.SQLException;
+import models.Utilisateur;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import java.security.*;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import models.Utilisateur;
-import static play.mvc.Results.internalServerError;
+import utils.Security;
+import utils.SessionManager;
 
 /**
  *

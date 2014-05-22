@@ -10,8 +10,6 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Casier;
 import models.Transaction;
 import play.mvc.Controller;

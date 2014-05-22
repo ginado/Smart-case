@@ -1,6 +1,5 @@
 package controllers;
 
-import utils.SessionManager;
 import dao.CasierDao;
 import dao.TransactionDao;
 import dao.UtilisateurDAO;
@@ -8,16 +7,13 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Casier;
 import models.Transaction;
 import models.Utilisateur;
-import play.data.DynamicForm;
-import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
+import utils.SessionManager;
 
 /**
  *

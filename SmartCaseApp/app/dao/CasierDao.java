@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Collection;
 import models.Casier;
 import play.db.DB;
 
@@ -16,8 +15,7 @@ import play.db.DB;
  */
 public class CasierDao {
     static public List<Casier> getCasiers() throws SQLException {
-        DB db = new DB();
-        Connection conn = db.getConnection();
+        Connection conn = DB.getConnection();
         ResultSet rsCasier;
         List<Casier> listeCasier = new ArrayList();
         Statement st = conn.createStatement();
