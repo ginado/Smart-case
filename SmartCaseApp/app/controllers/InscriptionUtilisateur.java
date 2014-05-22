@@ -1,7 +1,11 @@
 package controllers;
 
+import dao.TransactionDao;
 import dao.UtilisateurDAO;
+import java.sql.Date;
 import java.sql.SQLException;
+import java.util.Calendar;
+import models.Transaction;
 import models.Utilisateur;
 import play.data.DynamicForm;
 import play.data.Form;
@@ -29,9 +33,16 @@ public class InscriptionUtilisateur extends Controller {
         try {        
             UtilisateurDAO.ajouterUtilisateur(utilisateur);
         } catch (SQLException ex) {
-            return ok(views.html.error.render("L'adresse \""+utilisateur.getAdresseMail()+"\" a déja été utilisé pour créer un compte.","/"));
+            return ok(views.html.error.render("L'adresse \""+utilisateur.getAdresseMail()+"\" a déja été utilisé pour créer un compte.","/inscription"));
         }
         SessionManager.addSession("utilisateur", utilisateur.getAdresseMail());
+        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
+        try {
+            TransactionDao.ajouterTransaction(new Transaction(0,date,"inscription",utilisateur.getAdresseMail(),-1));
+            TransactionDao.ajouterTransaction(new Transaction(0,date,"connexion",utilisateur.getAdresseMail(),-1));
+        } catch (SQLException ex) {
+            return ok(views.html.error.render("Erreur interne","/"));
+        }
         return redirect("/main");
     }
     
