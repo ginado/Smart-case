@@ -9,14 +9,21 @@ POST	/authentification           controllers.Authentification.authentifier()
 GET     /inscription                controllers.InscriptionUtilisateur.getFormulaire()
 POST    /inscription                controllers.InscriptionUtilisateur.Inscrire()
 GET     /main                       controllers.VuePrincipale.main()
+
 GET    /deposer                     controllers.Deposer.deposer()
 GET    /deposerfin                  controllers.Deposer.deposerFin()
+
 GET    /echangerchoix               controllers.Echanger.choisir()
 GET    /echanger/:idCasier          controllers.Echanger.echanger(idCasier : String)
 GET    /echangerfin/:idCasier       controllers.Echanger.echangerFin(idCasier : String)
+
 GET    /retirerchoix                controllers.Retirer.choisir()
 GET    /retirer/:idCasier           controllers.Retirer.retirer(idCasier : String)
 GET    /retirerfin/:idCasier        controllers.Retirer.retirerFin(idCasier : String)
+
+GET    /signalerchoix               controllers.Signaler.choisir()
+GET    /signaler/:idCasier          controllers.Signaler.signaler(idCasier : String)
+
 GET    /logout                      controllers.Logout.logout()
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

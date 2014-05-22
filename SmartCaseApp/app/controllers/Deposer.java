@@ -29,7 +29,7 @@ public class Deposer extends Controller{
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
         //Search for an mpty locker
         Casier casierLibre = null;
@@ -47,7 +47,7 @@ public class Deposer extends Controller{
             try {
                 utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             } catch (SQLException ex) {
-                return ok(views.html.error.render("Erreur interne"));
+                return ok(views.html.error.render("Erreur interne","/main"));
             }
             return ok(views.html.accueil.render(utilisateur,"Tous les casiers sont pleins, impossible de déposer un objet."));
         } else {
@@ -64,7 +64,7 @@ public class Deposer extends Controller{
             CasierDao.remplirCasier(id,100);
             UtilisateurDAO.ajouterCredit(SessionManager.get("utilisateur"),1);
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."+ex.getMessage()));
+            return ok(views.html.error.render("Erreur interne."+ex.getMessage(),"/main"));
         }
         return redirect("/main");
     }

@@ -29,7 +29,7 @@ public class Echanger extends Controller {
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
         Utilisateur utilisateur =null;
         try {
@@ -37,10 +37,10 @@ public class Echanger extends Controller {
             if(Casier.allAreEmpty(casiers)) {
                 return ok(views.html.accueil.render(utilisateur,"Tout les casiers sont vides, impossible d'échanger un objet"));
             } else {
-                return ok(views.html.echanger_retirer_choix.render(utilisateur,casiers,true));
+                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier avec lequel vous voulez echanger vorte objet.","Échanger","echanger"));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
     }
     
@@ -51,19 +51,19 @@ public class Echanger extends Controller {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
         return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
     }
     
     static public Result echangerFin(String idCasier) {
         java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        int id = Integer.parseInt(SessionManager.get("casier"));
+        int id = Integer.parseInt(idCasier);
         try {
             TransactionDao.ajouterTransaction(new Transaction(0, date,"echange",SessionManager.get("utilisateur"),id));
             CasierDao.remplirCasier(id,200);
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
         return redirect("/main");
     }

@@ -19,7 +19,7 @@ public class VuePrincipale extends Controller {
         try {
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
         } catch (SQLException ex) {
-            return(ok(views.html.error.render("Erreur interne.")));
+            return(ok(views.html.error.render("Erreur interne.","/main")));
         }
         return ok(views.html.accueil.render(utilisateur,""));
     }

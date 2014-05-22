@@ -27,14 +27,14 @@ public class InscriptionUtilisateur extends Controller {
         String prenom = requestData.get("prenom");
         String nom = requestData.get("nom");
         if(requestData.get("password_confirmation").compareTo(requestData.get("password"))!=0)
-            return ok(views.html.error.render("Veuillez verifiez la saisie de votre mot de passe."));
+            return ok(views.html.error.render("Veuillez verifiez la saisie de votre mot de passe.","/"));
         String hashpassword=Security.crypt(requestData.get("adresseMail"));
                 
         Utilisateur utilisateur = new Utilisateur(adresseMail, prenom, nom, hashpassword, 0);
         try {        
             UtilisateurDAO.ajouterUtilisateur(utilisateur);
         } catch (SQLException ex) {
-            return ok(views.html.error.render("L'adresse \""+utilisateur.getAdresseMail()+"\" a déja été utilisé pour créer un compte."));
+            return ok(views.html.error.render("L'adresse \""+utilisateur.getAdresseMail()+"\" a déja été utilisé pour créer un compte.","/"));
         }
         SessionManager.addSession("utilisateur", utilisateur.getAdresseMail());
         return redirect("/main");

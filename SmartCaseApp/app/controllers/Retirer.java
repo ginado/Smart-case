@@ -29,7 +29,7 @@ Collection<Casier> casiers;
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
         Utilisateur utilisateur =null;
         try {
@@ -40,10 +40,10 @@ Collection<Casier> casiers;
             if(Casier.allAreEmpty(casiers)) {
                 return ok(views.html.accueil.render(utilisateur,"Tout les casiers sont vides, impossible de retirer un objet"));
             } else {
-                return ok(views.html.echanger_retirer_choix.render(utilisateur,casiers,false));
+                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier dont vous voulez récuperer le contenu","Récuperer","retirer"));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }        
     }
     
@@ -54,7 +54,7 @@ Collection<Casier> casiers;
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
         return ok(views.html.echanger_retirer.render(utilisateur,casier,false));
     }
