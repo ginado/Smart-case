@@ -1,5 +1,7 @@
 package dao;
 
+import exceptions.MotDePasseErrone;
+import exceptions.UtilisateurInexistant;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -37,10 +39,12 @@ public class UtilisateurDAO {
     }
 
     
-    static public Utilisateur authentifierUtilisateur(String adresseMail, String hashPassword) throws SQLException{
+    static public Utilisateur authentifierUtilisateur(String adresseMail, String hashPassword) throws SQLException, UtilisateurInexistant, MotDePasseErrone{
         Utilisateur user = getUtilisateur(adresseMail);
-        if(user==null || !hashPassword.equals(user.getHashPassword())){
-            user = null;
+        if(user==null) {
+            throw new UtilisateurInexistant("Aucun utilisateur d'addresse mail : "+adresseMail);
+        } else if (!hashPassword.equals(user.getHashPassword())) {
+            throw new MotDePasseErrone("Mauvais mot de passe pour :"+adresseMail);
         }
         return user;        
     }

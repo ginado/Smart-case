@@ -4,6 +4,8 @@ import dao.TransactionDao;
 import utils.Security;
 import utils.SessionManager;
 import dao.UtilisateurDAO;
+import exceptions.MotDePasseErrone;
+import exceptions.UtilisateurInexistant;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -35,13 +37,14 @@ public class Authentification extends Controller {
         Utilisateur utilisateur;
         try {
             utilisateur=UtilisateurDAO.authentifierUtilisateur(adresseMail, hashpassword);
-            if(utilisateur==null) {
-                return ok(views.html.error.render("Mauvais mot de passe pour : \""+adresseMail+"\"."));
-            }
             java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
             TransactionDao.ajouterTransaction(new Transaction(0, date,"connexion", utilisateur.getAdresseMail(),-1));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Aucun compte ayant comme email : \""+adresseMail+"\"."));
+            return ok(views.html.error.render("Erreur interne.","/"));
+        } catch (MotDePasseErrone ex) {
+            return ok(views.html.index.render(ex.getMessage()));
+        } catch (UtilisateurInexistant ex) {
+            return ok(views.html.index.render(ex.getMessage()));
         }
         SessionManager.addSession("utilisateur", utilisateur.getAdresseMail());
         return redirect("/main");
