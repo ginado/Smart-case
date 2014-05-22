@@ -1,28 +1,22 @@
 package controllers;
 
 import dao.TransactionDao;
-import utils.Security;
-import utils.SessionManager;
 import dao.UtilisateurDAO;
 import exceptions.MotDePasseErrone;
 import exceptions.UtilisateurInexistant;
-import java.io.UnsupportedEncodingException;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Transaction;
 import models.Utilisateur;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Controller;
 import play.mvc.Result;
-import static play.mvc.Results.internalServerError;
 import static play.mvc.Results.ok;
 import static play.mvc.Results.redirect;
+import utils.Security;
+import utils.SessionManager;
 
 /**
  *

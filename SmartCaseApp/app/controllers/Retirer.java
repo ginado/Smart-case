@@ -1,12 +1,10 @@
 package controllers;
 
-import utils.SessionManager;
 import dao.CasierDao;
 import dao.TransactionDao;
 import dao.UtilisateurDAO;
 import java.sql.Date;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -18,6 +16,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
 import static play.mvc.Results.redirect;
+import utils.SessionManager;
 
 /**
  *

@@ -1,13 +1,11 @@
 package controllers;
 
-import utils.SessionManager;
 import dao.UtilisateurDAO;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Utilisateur;
 import play.mvc.Controller;
 import play.mvc.Result;
+import utils.SessionManager;
 
 /**
  *

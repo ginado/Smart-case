@@ -1,6 +1,5 @@
 package controllers;
 
-import utils.SessionManager;
 import dao.CasierDao;
 import dao.TransactionDao;
 import dao.UtilisateurDAO;
@@ -9,15 +8,13 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import models.Casier;
 import models.Transaction;
 import models.Utilisateur;
 import play.mvc.Controller;
-import play.mvc.Http;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
+import utils.SessionManager;
 
 /**
  *
