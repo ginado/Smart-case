@@ -40,7 +40,7 @@ public class TransactionDao {
         DB db = new DB();
         Connection conn = db.getConnection();
         PreparedStatement st = conn.prepareStatement("INSERT INTO transactions VALUES (NULL,?,?,?,?)");
-        st.setDate(1,new java.sql.Date(Calendar.getInstance().getTimeInMillis()));
+        st.setDate(1,transaction.getDateTrans());
         st.setString(2,transaction.getTypeTrans().name().toLowerCase());
         st.setString(3,transaction.getUtilisateur());
         if(transaction.getIdCasier()==-1)

@@ -15,12 +15,15 @@ import play.mvc.Result;
 import static play.mvc.Results.ok;
 import utils.SessionManager;
 import arduino.*;
+import static controllers.ControllerCommandeArduino.connecteArduino;
+import static controllers.ControllerCommandeArduino.seuil;
+import static play.mvc.Results.ok;
 
 /**
  *
  * @author bombrunt
  */
-public class Echanger extends Controller {
+public class Echanger extends ControllerCommandeArduino {
     static public Result choisir() {
         Collection<Casier> casiers;
         try {
@@ -47,21 +50,36 @@ public class Echanger extends Controller {
         try {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            if(connecteArduino) {
+                try {
+                    SerialClass.ouvrirCasier(casier.getIdCasier());
+                } catch (Exception ex) {
+                    return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
+                }
+            }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne.","/main"));
-        }
-	try {
-	    int idCasierInt = Integer.parseInt(idCasier);
-	    SerialClass.ouvrirCasier(idCasierInt);
-	}catch (Exception e){
-	    return ok(views.html.error.render("Erreur interne","/main"));
-	}
+        }    
 	return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
     }
     
     static public Result echangerFin(String idCasier) {
-        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
         int id = Integer.parseInt(idCasier);
+        int poids = -1;
+        try {
+            if (connecteArduino) {
+                poids = SerialClass.peserCasier(id);
+                if (poids < seuil) {
+                    redirect("/echangerfin/"+idCasier);
+                } else {
+                    SerialClass.fermerCasier(id);
+                }
+            }
+        } catch (Exception exception) {
+            return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
+        }
+        
+        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
         try {
             TransactionDao.ajouterTransaction(new Transaction(0, date,"echange",SessionManager.get("utilisateur"),id));
             CasierDao.remplirCasier(id,200);

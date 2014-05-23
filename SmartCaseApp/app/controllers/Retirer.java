@@ -1,5 +1,7 @@
 package controllers;
 
+import arduino.SerialClass;
+import static controllers.ControllerCommandeArduino.connecteArduino;
 import dao.CasierDao;
 import dao.TransactionDao;
 import dao.UtilisateurDAO;
@@ -22,7 +24,7 @@ import utils.SessionManager;
  *
  * @author bombrunt
  */
-public class Retirer extends Controller {
+public class Retirer extends ControllerCommandeArduino {
     static public Result choisir() {
 Collection<Casier> casiers;
         try {
@@ -52,6 +54,13 @@ Collection<Casier> casiers;
         try {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            if(connecteArduino) {
+                try {
+                    SerialClass.ouvrirCasier(casier.getIdCasier());
+                } catch (Exception ex) {
+                    return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
+                }
+            }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne.","/main"));
         }
@@ -62,6 +71,13 @@ Collection<Casier> casiers;
        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
        int id = Integer.parseInt(idCasier);
         try {
+            if(connecteArduino) {
+                try {
+                    SerialClass.fermerCasier(id);
+                } catch (Exception ex) {
+                    return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
+                }
+            }
             TransactionDao.ajouterTransaction(new Transaction(0, date,"retrait",SessionManager.get("utilisateur"),id));
             CasierDao.viderCasier(id);
             UtilisateurDAO.ajouterCredit(SessionManager.get("utilisateur"),-1);
