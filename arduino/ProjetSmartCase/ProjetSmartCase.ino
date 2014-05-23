@@ -1,4 +1,3 @@
-
 String lireCommande(){
   String commande = "";
   char dernierLu;
@@ -20,34 +19,34 @@ String lireCommande(){
 }  
 
 /* pour les capteurs 0,4,8 on envoie un signal sur le pin 22 
-       //            1,3,9                    //          23 
-      //             2,6,10                   //          24
-      //             3,7,11                   //          25
-      
+ //            1,3,9                    //          23 
+ //             2,6,10                   //          24
+ //             3,7,11                   //          25
+ 
  On lit les valeurs reçues sur les entrées :
  A0 pour les capteurs de 0 à 3
  A1        //            4 à 7
  A2        //            8 à 11
-                                                          */
+ */
 int lireCapteur (int numCapteur){
   Serial.println("On lit la valeur du capteur " + String(numCapteur));
   int pin=22+numCapteur%4;
   digitalWrite(pin, HIGH);
   int in=numCapteur/4;
-  
+
   /*switch (in){ 
-  case 0:
-     analogRead(0);
-     break;
-  case 1:
-     analogRead(A11);
-     break;
-  case 2:
-     analogRead(A2);
-     break;
-  default :
-     Serial.println("erreur, mauvais numero de casier");
-  }*/
+   case 0:
+   analogRead(0);
+   break;
+   case 1:
+   analogRead(A11);
+   break;
+   case 2:
+   analogRead(A2);
+   break;
+   default :
+   Serial.println("erreur, mauvais numero de casier");
+   }*/
   int valeurlue=analogRead(in);
   digitalWrite(pin,LOW);
   return valeurlue;
@@ -55,10 +54,10 @@ int lireCapteur (int numCapteur){
 
 /*
   On utilise un multiplexeur 12->1 (commande sur 4 bits) pour selectionner le capteur à lire. 
-   ArduinoMega(26..29) <--> CommandeMUX(0..3)
-        ArduinoMega(3) <--> SortieMUX(0)
-       ArduinoMega(30) <--> CapteursIN (0..11)
-    CapteursOUT(0..11) <--> EntreeMUX(0..11)
+ ArduinoMega(26..29) <--> CommandeMUX(0..3)
+ ArduinoMega(3) <--> SortieMUX(0)
+ ArduinoMega(30) <--> CapteursIN (0..11)
+ CapteursOUT(0..11) <--> EntreeMUX(0..11)
  Resistance (470 Ohms) <--> GND
  */
 int lireCapteurMux (int numCapteur){
@@ -96,6 +95,7 @@ int fermerSerrure (int numSerrure){
 
 String commandeLue;
 void setup(){
+  pinMode(13, OUTPUT);
   pinMode(22,OUTPUT);
   pinMode(23,OUTPUT);
   pinMode(24,OUTPUT);
@@ -109,13 +109,14 @@ void setup(){
 }
 
 void loop(){
+  Serial.println("1");
   while (commandeLue.equals("")){
+    Serial.println("2");
     commandeLue = lireCommande();
   } 
-  Serial.print(commandeLue);
+  Serial.println("Commande lue: " + commandeLue);
 
   switch (commandeLue.charAt(0)){
-
     //Commande "capteur"
   case 'c':
     {
@@ -147,6 +148,28 @@ void loop(){
       break;
     }
 
+  case 'x':
+    {
+      int i = 1;
+      while(i<20){
+        if(i%2){
+          digitalWrite(13,HIGH);     
+          Serial.println("ping");
+        } 
+        else {
+          digitalWrite(13,LOW);
+          Serial.println("pong");
+        }
+        i++;
+        delay(500);
+      }
+      Serial.println("4");
+      /*while (Serial.available()){
+        Serial.read();  
+      }*/
+      break;
+    }
+  
   default:
     //traiter l'erreur
     Serial.println("erreur");
@@ -156,6 +179,9 @@ void loop(){
 
   commandeLue="";
 }
+
+
+
 
 
 
