@@ -45,6 +45,7 @@ int lireCapteur (int numCapteur){
   digitalWrite(pin, HIGH);
 
   int in=EntreeCapteur(numCapteur);
+
   int valeurlue=analogRead(in);
 
   digitalWrite(pin,LOW);
@@ -82,7 +83,9 @@ void setup(){
 }
 
 void loop(){
+  Serial.println("1");
   while (commandeLue.equals("")){
+    Serial.println("2");
     commandeLue = lireCommande();
   } 
   //Serial.println("Commande lue: " + commandeLue);
@@ -148,6 +151,28 @@ void loop(){
       break;
     }
 
+  case 'x':
+    {
+      int i = 1;
+      while(i<20){
+        if(i%2){
+          digitalWrite(13,HIGH);     
+          Serial.println("ping");
+        } 
+        else {
+          digitalWrite(13,LOW);
+          Serial.println("pong");
+        }
+        i++;
+        delay(500);
+      }
+      Serial.println("4");
+      /*while (Serial.available()){
+        Serial.read();  
+      }*/
+      break;
+    }
+  
   default:
     //traiter l'erreur
     Serial.println("KO");
@@ -157,7 +182,6 @@ void loop(){
 
   commandeLue="";
 }
-
 
 
 
