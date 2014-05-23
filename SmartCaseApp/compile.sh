@@ -1,9 +1,5 @@
 #!/bin/sh
 
-echo "SmartCaseApp/compile.sh" >> ../.gitignore
-echo "Modifie le script en changeant les variables et supprime les lignes 3, 4 et 5"
-exit 1
-
 CHEMIN_DISTANT='~/cours/fablab/SmartCaseApp'
 LOGIN=meignanm
 MACHINE=telesun

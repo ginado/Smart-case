@@ -15,6 +15,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
 import utils.SessionManager;
+import arduino.*;
 
 /**
  *
@@ -49,7 +50,12 @@ public class Deposer extends Controller{
             return ok(views.html.accueil.render(utilisateur,"Tous les casiers sont pleins, impossible de déposer un objet."));
         } else {
             SessionManager.addSession("casier",String.valueOf(casierLibre.getIdCasier()));
-            return ok(views.html.deposer.render(casierLibre));
+            try{
+		SerialClass.ouvrirCasier(casierLibre.getIdCasier());
+	    }catch (Exception e){
+                return ok(views.html.error.render("Erreur interne","/main"));
+	    }
+	    return ok(views.html.deposer.render(casierLibre));
         }
     }
     

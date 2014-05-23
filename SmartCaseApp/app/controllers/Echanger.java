@@ -14,6 +14,7 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
 import utils.SessionManager;
+import arduino.*;
 
 /**
  *
@@ -49,7 +50,13 @@ public class Echanger extends Controller {
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne.","/main"));
         }
-        return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
+	try {
+	    int idCasierInt = Integer.parseInt(idCasier);
+	    SerialClass.ouvrirCasier(idCasierInt);
+	}catch (Exception e){
+	    return ok(views.html.error.render("Erreur interne","/main"));
+	}
+	return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
     }
     
     static public Result echangerFin(String idCasier) {
