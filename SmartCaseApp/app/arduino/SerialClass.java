@@ -42,7 +42,7 @@ public class SerialClass {
     public static int peserCasier(int id) throws Exception{
 	String output = sendCommand("c"+id);
 	if (output.equals("KO")){
-		throw new Exception("Erreur avec l'arduino lors de l'ouverture du casier");
+		throw new Exception("Erreur avec l'arduino lors du pesage du casier du casier");
 	}
 	return Integer.parseInt(output);
     }
