@@ -18,24 +18,36 @@
 
 <div style="display:inline-block; float:left;">
     <h3 id="loginFont">Identification</h3> <br>
+    <table border="0">
     <form class="login_form" action="/authentification" method="post" name="login_form">
-        <ul style="position: top-left;margin-left:20px; margin-right:10px">
+    
+        <tr style="position: top-left; margin-right:10px">
             
-            <li style="display:inline">
-                <label for="name" id="loginLabel">Adresse mail :</label>
+            <td style="margin-left:40px">
+                <label for="name" id="loginLabel" style="margin-left:40px;">Adresse mail </label>
+                </td>
+                <td>
                 <input type="text" name="adresseMail" />
-            </li>
+            </td>
+            </tr>
             
-            <li>
-                <label for="password" id="loginLabel">Mot de passe :</label>
+            <tr style="position: top-left;margin-left:50px; margin-right:10px">
+            <td style="margin-left:40px">
+                <label for="password" id="loginLabel" style="margin-left:40px">Mot de passe</label>
+                </td>
+                <td>
                 <input type="password" name="password" />
-            </li>
-            <li>
-                <button class="submit" type="submit" class="loginFormButton">S'identifier</button>
-            </li>
+            </td>
+            </tr>
+            <tr style="margin-left:50px; margin-right:10px">
+            <td style="margin-left:40px">
+                <button class="submit" type="submit" id="loginButton" class="loginFormButton" style = "margin-left:40px">S'identifier</button>
+            </td>
+            </tr>
             
-        </ul>
+        </tr>
     </form>
+    </table>
     
 </div>
 
