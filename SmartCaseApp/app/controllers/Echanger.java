@@ -15,8 +15,6 @@ import play.mvc.Result;
 import static play.mvc.Results.ok;
 import utils.SessionManager;
 import arduino.*;
-import static controllers.ControllerCommandeArduino.connecteArduino;
-import static controllers.ControllerCommandeArduino.seuil;
 import static play.mvc.Results.ok;
 
 /**
@@ -50,7 +48,7 @@ public class Echanger extends ControllerCommandeArduino {
         try {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
-            if(connecteArduino) {
+            if(debugVerrou) {
                 try {
                     SerialClass.ouvrirCasier(casier.getIdCasier());
                 } catch (Exception ex) {
@@ -67,14 +65,16 @@ public class Echanger extends ControllerCommandeArduino {
         int id = Integer.parseInt(idCasier);
         int poids = -1;
         try {
-            if (connecteArduino) {
+            if (!debugSenseur) {
                 poids = SerialClass.peserCasier(id);
                 if (poids < seuil) {
                     redirect("/echangerfin/"+idCasier);
-                } else {
-                    SerialClass.fermerCasier(id);
                 }
             }
+            if(!debugVerrou) {
+                        SerialClass.fermerCasier(id);
+                }
+            
         } catch (Exception exception) {
             return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
         }

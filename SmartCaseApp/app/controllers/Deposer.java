@@ -53,7 +53,7 @@ public class Deposer extends ControllerCommandeArduino{
         } else {
             SessionManager.addSession("casier",String.valueOf(casierLibre.getIdCasier()));
             
-            if(connecteArduino) {
+            if(!debugVerrou) {
                 try {
                     SerialClass.ouvrirCasier(casierLibre.getIdCasier());
                 } catch (Exception ex) {
@@ -70,11 +70,13 @@ public class Deposer extends ControllerCommandeArduino{
         int poids = -1;
         
         try {
-            if (connecteArduino) {
+            if (!debugVerrou) {
                 SerialClass.fermerCasier(id);
-                poids = SerialClass.peserCasier(id);
-                if (poids < seuil) {
-                    return redirect("/deposerfin/");
+                if(!debugSenseur){
+                    poids = SerialClass.peserCasier(id);
+                    if (poids < seuil) {
+                        return redirect("/deposerfin/");
+                    }
                 }
             }
         } catch (Exception exception) {
