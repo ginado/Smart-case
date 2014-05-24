@@ -1,8 +1,24 @@
 @(utilisateur : Utilisateur , casier : Casier, isEchange : Boolean)
 
-@main("Smart Case"){
-<a href="/logout" class="btn">Se déconnecter</a>
-<a href="/main" class="btn">Accueil</a>
-Vous pouvez maintenant @if(isEchange){echanger votre objet avec}else{recuperer} l'objet dans le casier n°@casier.getIdCasier().
-<a href='/@if(isEchange){echanger}else{retirer}fin/@casier.getIdCasier()' class="btn btn-default">C'est fait !</a>
+@main{
+        
+        
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="titleLink" class="navbar-brand" href="/">Smart Case</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href ="/main" class="btn">Home</a></li>
+                        <li><a href="/logout" class="btn">Se déconnecter</a></li>
+                        <li><a href="/signalerchoix" class="btn">Signaler un contenu innaproprié</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p class="text-center">Vous pouvez maintenant @if(isEchange){echanger votre objet avec}else{recuperer} l'objet dans le casier n°@casier.getIdCasier().
+            </br>
+            <a href='/@if(isEchange){echanger}else{retirer}fin/@casier.getIdCasier()' class="btn btn-default btn-xl">C'est fait !</a> 
+        </p>
 }

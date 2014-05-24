@@ -1,0 +1,46 @@
+a:hover {
+    text-decoration: none;
+}
+
+.btn-xl {
+    padding: 60px 60px;
+    font-size : 40px;
+}
+
+.btn-casier {
+    padding: 48px 48px;
+    font-size : 32px;
+}
+
+.form-group {
+    font-size : 30px;
+}
+
+.container-fluid {
+    text-align: center;
+}
+
+body {
+    background-image: url('/assets/images/greenPattern.jpg');
+}
+
+
+h1 {
+    font-size: 100px;
+    color: #000000;
+}
+
+h2 {
+    font-size: 80px;
+    color: #000000;
+}
+
+h3 {
+    font-size: 70px;
+    color: #000000;
+}
+
+p {
+    font-size: 35px;
+    color: #ffffff;
+}

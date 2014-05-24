@@ -1,7 +1,25 @@
 @(cause : String, adresseRetour : String)
 
-@main("Smart Case"){
-<a href="@adresseRetour" class="btn">Accueil</a>
-<h1>Erreur</h1></br>
-@cause
+@main{
+        
+        
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="titleLink" class="navbar-brand" href="/">Smart Case</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href=@adresseRetour class="btn">Home</a></li>
+                        <li><a href="/signalerchoix" class="btn">Signaler un contenu innaproprié</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <p class="text-center">
+            <h1>Erreur</h1></br>
+            <p>@cause</p>
+            <a href=@adresseRetour class="btn btn-xl">Retour</a>
+        </p>
+
 }

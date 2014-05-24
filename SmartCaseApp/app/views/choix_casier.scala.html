@@ -1,34 +1,34 @@
 @(casiers : java.util.Collection[Casier],descriptionChoix : String,verbeAction : String,destination : String)
 
-  @main("Smart Case"){
-      <a href="/logout" class="btn">Se déconnecter</a>
-      <a href="/main" class="btn">Accueil</a>
+@main{
+        
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="titleLink" class="navbar-brand" href="/">Smart Case</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href ="/main" class="btn">Home</a></li>
+                        <li><a href="/logout" class="btn">Se déconnecter</a></li>
+                        <li><a href="/signalerchoix" class="btn">Signaler un contenu innaproprié</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
       @if(Casier.allAreEmpty(casiers)){
-          <p>Désolé, tout les casiers sont vides pour le moment.
+          <p class="text-center"> Désolé, tout les casiers sont vides pour le moment.
           Voulez vous <a href="/deposer">déposer</a> un objet ?</p>
       } else {
-      Voici l'emsemble des casiers. Les casiers pleins sont en rouge.
-      @descriptionChoix
-      <table class="table table-hover ">
-      <thead>
-      <tr>
-          <th>Numero du Casier</th>
-      </tr>
-      </thead>
+      <p class="text-center">@descriptionChoix</p>
           @for(casier <- casiers){
-            <tr>
-                @if(casier.estPlein()) {
-                    <td style="color: red">@casier.getIdCasier()</td>
-                } else {
-                    <td>@casier.getIdCasier()</td>
-                }
-                <td>
-                @if(casier.estPlein()){
-                     <a href="/@destination/@casier.getIdCasier()" class="btn btn-default">@verbeAction</a>
-                }
-                </td>
-             </tr>
+
+              @if(casier.estPlein()) {
+              <a href="/@destination/@casier.getIdCasier()" class="btn btn-default btn-casier">@verbeAction N°@casier.getIdCasier()</a>
+              } else {
+              <a href="/@destination/@casier.getIdCasier()" class="btn btn-default btn-casier">@verbeAction N°@casier.getIdCasier()</a>
+              }
           }
-    </table>
     }
-  }
+}

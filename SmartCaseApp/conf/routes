@@ -26,6 +26,8 @@ GET    /signaler/:idCasier          controllers.Signaler.signaler(idCasier : Str
 
 GET    /logout                      controllers.Logout.logout()
 
+GET    /aide                        controllers.Aide.aide()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
 GET     /webjars/*file              controllers.WebJarAssets.at(file)

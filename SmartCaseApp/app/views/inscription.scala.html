@@ -1,7 +1,20 @@
-@main("Smart Case"){
-<a href="/" class="btn">Accueil</a>
+@main{
+        
+        
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="titleLink" class="navbar-brand" href="/">Smart Case</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href="/signalerchoix" class="btn">Signaler un contenu innaproprié</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-		<form role="form" action="/inscription" method="post" name="registration_form">
+	<form role="form" action="/inscription" method="post" name="registration_form">
            <div id="registrationContainer">         
                     <h2>Inscription</h2>
                     
@@ -31,7 +44,7 @@
                     </div>
                     
                     <div class="form-group">
-                        <button class="submit" type="submit" class="submitFormButton">S'inscrire</button>
+                        <button class="submit" type="submit" class="btn btn-xl">S'inscrire</button>
                     </div>
 		</form>
 		<div>
