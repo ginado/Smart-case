@@ -35,6 +35,16 @@ h2 {
     color: #000000;
 }
 
+#shadow{
+text-shadow: 
+white 0.1em 0.1em 0.2em
+}
+
+#blackShadow{
+text-shadow: 
+black 0.1em 0.1em 0.2em
+}   
+
 h3 {
     font-size: 70px;
     color: #000000;
@@ -43,4 +53,10 @@ h3 {
 p {
     font-size: 35px;
     color: #ffffff;
+}
+
+.col-md-3{
+background-color:hsl(120,100%,75%);
+color: black;
+opacity:0.3;
 }

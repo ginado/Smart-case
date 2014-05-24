@@ -16,8 +16,8 @@
         </div>
         
         <div class="container-fluid">
-            <a href="/aide"><h1>SmartCase</h1></a>
-            @if(message!=null && message.length()>0){<p>@message</p>}
+            <a href="/aide"><h1  id="shadow">SmartCase</h1></a>
+            @if(message!=null && message.length()>0){<p id="blackShadow">@message</p>}
             <div class="row">
                 <div class="col-md-12">
                     <form action="/authentification" method="post" name="login_form" role="form">
