@@ -1,7 +1,6 @@
 package controllers;
 
 import arduino.SerialClass;
-import static controllers.ControllerCommandeArduino.connecteArduino;
 import dao.CasierDao;
 import dao.TransactionDao;
 import dao.UtilisateurDAO;
@@ -54,7 +53,7 @@ Collection<Casier> casiers;
         try {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
-            if(connecteArduino) {
+            if(!debugVerrou) {
                 try {
                     SerialClass.ouvrirCasier(casier.getIdCasier());
                 } catch (Exception ex) {
@@ -71,7 +70,7 @@ Collection<Casier> casiers;
        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
        int id = Integer.parseInt(idCasier);
         try {
-            if(connecteArduino) {
+            if(!debugVerrou) {
                 try {
                     SerialClass.fermerCasier(id);
                 } catch (Exception ex) {
