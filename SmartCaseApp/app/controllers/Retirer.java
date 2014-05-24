@@ -78,12 +78,13 @@ Collection<Casier> casiers;
                     return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
                 }
             }
-            TransactionDao.ajouterTransaction(new Transaction(0, date,"retrait",SessionManager.get("utilisateur"),id));
+            Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            TransactionDao.ajouterTransaction(new Transaction(0, date,"retrait",utilisateur.getAdresseMail(),id));
             CasierDao.viderCasier(id);
-            UtilisateurDAO.ajouterCredit(SessionManager.get("utilisateur"),-1);
+            UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),-1);
+            return ok(views.html.accueil.render(utilisateur,"Votre retrait a bien été pris en compte."));
         } catch (SQLException ex) {
-            Logger.getLogger(Retirer.class.getName()).log(Level.SEVERE, null, ex);
+            return ok(views.html.error.render("Erreur interne","/main"));
         }
-        return redirect("/main");
     }
 }

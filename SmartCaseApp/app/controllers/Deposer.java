@@ -82,14 +82,16 @@ public class Deposer extends ControllerCommandeArduino{
         }
         
         java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
+        Utilisateur utilisateur;
         try {
-            TransactionDao.ajouterTransaction(new Transaction(0, date,"depot",SessionManager.get("utilisateur"),id));
+            utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            TransactionDao.ajouterTransaction(new Transaction(0, date,"depot",utilisateur.getAdresseMail(),id));
             CasierDao.remplirCasier(id,poids);
-            UtilisateurDAO.ajouterCredit(SessionManager.get("utilisateur"),1);
+            UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),1);
+            return ok(views.html.accueil.render(utilisateur,"Votre dépot a bien été pris en compte."));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne."+ex.getMessage(),"/main"));
+            return ok(views.html.error.render("Erreur interne.","/main"));
         }
-        return redirect("/main");
     }
 }
 

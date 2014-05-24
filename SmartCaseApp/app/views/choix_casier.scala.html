@@ -27,7 +27,7 @@
               @if(casier.estPlein()) {
               <a href="/@destination/@casier.getIdCasier()" class="btn btn-default btn-casier">@verbeAction N°@casier.getIdCasier()</a>
               } else {
-              <a href="/@destination/@casier.getIdCasier()" class="btn btn-default btn-casier">@verbeAction N°@casier.getIdCasier()</a>
+              <button class="btn btn-default btn-casier btn-danger">@verbeAction N°@casier.getIdCasier()</button>
               }
           }
     }

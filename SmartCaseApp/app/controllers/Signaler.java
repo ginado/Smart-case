@@ -13,9 +13,11 @@ import java.util.Calendar;
 import java.util.Collection;
 import models.Casier;
 import models.Transaction;
+import models.Utilisateur;
 import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
+import static play.mvc.Results.redirect;
 import utils.SessionManager;
 
 /**
@@ -45,14 +47,18 @@ public class Signaler extends Controller {
     
     
     public static Result signaler(String idCasier){
-        boolean connecte= SessionManager.get("utilisateur")!=null;
         java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
         try {
+            Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             TransactionDao.ajouterTransaction(new Transaction(0, date, "signaler", SessionManager.get("utilisateur"), Integer.parseInt(idCasier)));
+            if(utilisateur==null) {
+                return ok(views.html.index.render("Merci de nous avoir signaler ce contenu."));
+            } else {
+                return ok(views.html.accueil.render(utilisateur,"Merci de nous avoir signaler ce contenu."));
+            }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne",connecte ? "/main" :"/"));
+            return ok(views.html.error.render("Erreur interne",SessionManager.get("utilisateur")!=null ? "/main" :"/"));
         }
-        return redirect(connecte ? "/main" :"/");
     }
     
 }
