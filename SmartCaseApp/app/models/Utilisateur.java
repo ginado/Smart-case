@@ -9,9 +9,9 @@ public class Utilisateur {
     private String prenom;
     private String nom;
     private String hashPassword;
-    private int credit;
+    private Integer credit;
 
-    public Utilisateur(String adresse_mail, String prenom, String nom, String hash_password, int credit) {
+    public Utilisateur(String adresse_mail, String prenom, String nom, String hash_password, Integer credit) {
         this.adresseMail = adresse_mail;
         this.prenom = prenom;
         this.nom = nom;
@@ -35,7 +35,7 @@ public class Utilisateur {
         return hashPassword;
     }
 
-    public int getCredit() {
+    public Integer getCredit() {
         return credit;
     }
     

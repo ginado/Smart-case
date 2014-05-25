@@ -15,6 +15,7 @@ import play.mvc.Result;
 import static play.mvc.Results.ok;
 import utils.SessionManager;
 import arduino.*;
+import java.util.List;
 import static play.mvc.Results.ok;
 
 /**
@@ -23,7 +24,7 @@ import static play.mvc.Results.ok;
  */
 public class Echanger extends ControllerCommandeArduino {
     static public Result choisir() {
-        Collection<Casier> casiers;
+        List<Casier> casiers;
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
@@ -62,8 +63,8 @@ public class Echanger extends ControllerCommandeArduino {
     }
     
     static public Result echangerFin(String idCasier) {
-        int id = Integer.parseInt(idCasier);
-        int poids = -1;
+        Integer id = Integer.parseInt(idCasier);
+        Integer poids = -1;
         try {
             if (!debugSenseur) {
                 poids = SerialClass.peserCasier(id);

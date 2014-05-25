@@ -35,6 +35,7 @@ GET    /utilisateurs                controllers.Administrateur.getUsers()
 GET    /ajoutercredit/:idUtilisateur/:nbCredit       controllers.Administrateur.addCredit(idUtilisateur : String, nbCredit : Integer)
 
 GET    /casiers                     controllers.Administrateur.getCasiers()
+GET    /casier/:idCasier            controllers.Administrateur.getCasier(idCasier : String)
 
 
 # Map static resources from the /public folder to the /assets URL path

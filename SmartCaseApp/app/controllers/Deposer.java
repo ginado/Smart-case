@@ -66,8 +66,8 @@ public class Deposer extends ControllerCommandeArduino{
     }
     
     public static Result deposerFin(){
-        int id = Integer.parseInt(SessionManager.get("casier"));
-        int poids = -1;
+        Integer id = Integer.parseInt(SessionManager.get("casier"));
+        Integer poids = -1;
         
         try {
             if (!debugVerrou) {

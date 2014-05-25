@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import models.Utilisateur;
 import play.db.DB;
 
@@ -29,15 +30,15 @@ public class UtilisateurDAO {
             String prenom = rs.getString("prenom");
             String nom = rs.getString("nom");
             String hashPassword = rs.getString("hashPassword");
-            int credit = rs.getInt("credit");
+            Integer credit = rs.getInt("credit");
             user = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
         }
 
         return user;
     }
 
-    static public Collection<Utilisateur> getUtilisateurs() throws SQLException {
-        Collection<Utilisateur> utilisateurs = new ArrayList();
+    static public List<Utilisateur> getUtilisateurs() throws SQLException {
+        List<Utilisateur> utilisateurs = new ArrayList();
         Connection conn = DB.getConnection();
         PreparedStatement st = conn.prepareStatement(
                 "SELECT * FROM Utilisateurs");
@@ -48,7 +49,7 @@ public class UtilisateurDAO {
             String prenom = rs.getString("prenom");
             String nom = rs.getString("nom");
             String hashPassword = rs.getString("hashPassword");
-            int credit = rs.getInt("credit");
+            Integer credit = rs.getInt("credit");
             utilisateur = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
             utilisateurs.add(utilisateur);
         }
@@ -74,7 +75,7 @@ public class UtilisateurDAO {
         conn.close();
     }
 
-    public static void ajouterCredit(String utilisateur, int i) throws SQLException {
+    public static void ajouterCredit(String utilisateur, Integer i) throws SQLException {
         Connection conn = DB.getConnection();
         Statement st = conn.createStatement();
         st.executeUpdate("UPDATE Utilisateurs SET credit=credit+"+i+" WHERE adresseMail='"+utilisateur+"'");

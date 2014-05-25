@@ -39,7 +39,7 @@ public class CasierDao {
         return listeCasier;
     }
     
-    static public void remplirCasier(int idCasier,int poids) throws SQLException{
+    static public void remplirCasier(Integer idCasier,Integer poids) throws SQLException{
         DB db = new DB();
         Connection conn = db.getConnection();
         PreparedStatement st = conn.prepareStatement("UPDATE casiers SET estPlein=1, poids=? WHERE idCasier=?");
@@ -50,7 +50,7 @@ public class CasierDao {
     }
     
     
-    static public void viderCasier(int idCasier) throws SQLException{
+    static public void viderCasier(Integer idCasier) throws SQLException{
         DB db = new DB();
         Connection conn = db.getConnection();
         PreparedStatement st = conn.prepareStatement("UPDATE casiers SET estPlein=0, poids=0 WHERE idCasier=?");

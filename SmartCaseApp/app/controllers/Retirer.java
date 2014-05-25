@@ -8,6 +8,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import models.Casier;
@@ -25,7 +26,7 @@ import utils.SessionManager;
  */
 public class Retirer extends ControllerCommandeArduino {
     static public Result choisir() {
-Collection<Casier> casiers;
+List<Casier> casiers;
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
@@ -68,7 +69,7 @@ Collection<Casier> casiers;
    
    static public Result retirerFin(String idCasier) {
        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
-       int id = Integer.parseInt(idCasier);
+       Integer id = Integer.parseInt(idCasier);
         try {
             if(!debugVerrou) {
                 try {

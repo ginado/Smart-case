@@ -11,6 +11,7 @@ import java.sql.Date;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
+import java.util.List;
 import models.Casier;
 import models.Transaction;
 import models.Utilisateur;
@@ -29,7 +30,7 @@ public class Signaler extends Controller {
     public static Result choisir(){
         boolean connecte= SessionManager.get("utilisateur")!=null;
         try {
-            Collection<Casier> casiers = CasierDao.getCasiers();
+            List<Casier> casiers = CasierDao.getCasiers();
             if(Casier.allAreEmpty(casiers)) {
                 if(connecte) {
                     return ok(views.html.accueil.render(UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur")),"Tout les casiers sont vides."));
