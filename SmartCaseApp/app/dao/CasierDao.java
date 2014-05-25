@@ -15,6 +15,12 @@ import play.db.DB;
  * @author bombrunt
  */
 public class CasierDao {
+    
+    /**
+     * 
+     * @return The list of all the lockers in the database
+     * @throws SQLException
+     */
     static public List<Casier> getCasiers() throws SQLException {
         Connection conn = DB.getConnection();
         ResultSet rsCasier;
@@ -39,17 +45,27 @@ public class CasierDao {
         return listeCasier;
     }
     
+    /**
+     * Rempli le casier n°idCasier avec un poids = poids
+     * @param idCasier
+     * @param poids
+     * @throws SQLException
+     */
     static public void remplirCasier(Integer idCasier,Integer poids) throws SQLException{
-        DB db = new DB();
-        Connection conn = db.getConnection();
+        Connection conn = DB.getConnection();
         PreparedStatement st = conn.prepareStatement("UPDATE casiers SET estPlein=1, poids=? WHERE idCasier=?");
-        st.setInt(1,idCasier);
-        st.setInt(2,poids);
+        st.setInt(1,poids);
+        st.setInt(2,idCasier);
         st.executeUpdate();
         conn.close();
     }
     
     
+    /**
+     * Vide le casier de n°idCasier
+     * @param idCasier
+     * @throws SQLException
+     */
     static public void viderCasier(Integer idCasier) throws SQLException{
         DB db = new DB();
         Connection conn = db.getConnection();
@@ -59,6 +75,12 @@ public class CasierDao {
         conn.close();
     }
     
+    /**
+     * Retourne la structure correspondante au casier n°idCasier
+     * @param idCasier
+     * @return
+     * @throws SQLException
+     */
     public static Casier getCasier(String idCasier) throws SQLException {
         DB db = new DB();
         Casier c = null;

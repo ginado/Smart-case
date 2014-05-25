@@ -1,26 +1,23 @@
 @(utilisateurs: java.util.List[Utilisateur])
 
-	@main{
-		<table class="table table-hover table-striped table-bordered">
-			<tr>
-			<td>Prénom</td>
-			<td>Nom</td>
-			<td>Email</td>
-			<td>Crédit</td>
-			<td></td>
-			</tr>
-			
-			@for(utilisateur <- utilisateurs) {
-			
-			<tr>
-			
-			<td>@utilisateur.getPrenom()</td>
-			<td>@utilisateur.getNom()</td>
-			<td>@utilisateur.getAdresseMail()</td>
-			<td>@utilisateur.getCredit()</td>
-		    <td><a href="/utilisateur/@utilisateur.getAdresseMail()">Acceder a sa fiche</a></td>
-			</tr>
-			
-			}
-		</table>
-	}
+@main{
+<table title="Liste des utilisateurs" class="table table-hover table-bordered">
+    <tr>
+        <td>Prénom <a href="/casiers/tri/0"><span class="glyphicon glyphicon-chevron-up"></span></a><a href="/casiers/tri/1"><span class="glyphicon glyphicon-chevron-down"></span></a></td>
+        <td>Nom <a href="/casiers/tri/2"><span class="glyphicon glyphicon-chevron-up"></a> <a href="/casiers/tri/3"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
+        <td>Email <a href="/casiers/tri/4"><span class="glyphicon glyphicon-chevron-up"></a> <a href="/casiers/tri/5"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
+        <td>Crédit <a href="/casiers/tri/6"><span class="glyphicon glyphicon-chevron-up"></a> <a href="/casiers/tri/7"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
+        <td></td>
+    </tr>
+    
+    @for(utilisateur <- utilisateurs) {
+    <tr>
+        <td>@utilisateur.getPrenom()</td>
+        <td>@utilisateur.getNom()</td>
+        <td>@utilisateur.getAdresseMail()</td>
+        <td>@utilisateur.getCredit()</td>
+        <td><a href="/utilisateur/@utilisateur.getAdresseMail()">Accéder à sa fiche</a></td>
+    </tr>
+    }
+</table>
+}

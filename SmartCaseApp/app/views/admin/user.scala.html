@@ -1,37 +1,40 @@
 @(utilisateur: Utilisateur,transactions : java.util.List[Transaction])
-        
+
 @main{
 <h2>@utilisateur.getPrenom() @utilisateur.getNom()</h2>
-<h3>@utilisateur.getAdresseMail()</h3>
+<p>Email : @utilisateur.getAdresseMail()</p>
 <div class="btn-group">
-  <button class="btn btn-default">Crédits : @utilisateur.getCredit()</button>
-  @if(utilisateur.getCredit()>=10){
+    @if(utilisateur.getCredit()>=10){
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-10"  class="btn btn-default">-10</a>
-  } else {
+    } else {
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-10"  class="btn btn-default disabled">-10</a>
-  }
-  @if(utilisateur.getCredit()>=1){
+    }
+    <button class="btn disabled">Crédits : @utilisateur.getCredit()</button>
+    @if(utilisateur.getCredit()>=1){
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-1"  class="btn btn-default">-1</a>
-  } else {
+    } else {
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-1"  class="btn btn-default disabled">-1</a>
-  }
-  <a href="/ajoutercredit/@utilisateur.getAdresseMail/1"  class="btn btn-default">+1</a>
-  <a href="/ajoutercredit/@utilisateur.getAdresseMail/10" class="btn btn-default">+10</a>
+    }
+    
+    <a href="/ajoutercredit/@utilisateur.getAdresseMail/1"  class="btn btn-default">+1</a>
+    <a href="/ajoutercredit/@utilisateur.getAdresseMail/10" class="btn btn-default">+10</a>
+    
 </div>
 
-<table class="table table-hover table-bordered">
+<table title="Liste des interactions de @utilisateur.getPrenom() @utilisateur.getNom()" class="table table-hover table-bordered">
     <tr>
-        <th>#</th>
+        <th>Identificateur</th>
         <th>Date</th>
         <th>Type</th>
-        <th>N° Casier</th>
+        <th>Numéro Casier</th>
     </tr>
+    
     @for(transaction <- transactions){
     <tr>
         <td>@transaction.getIdTransaction()</td>
         <td>@transaction.getDateTrans()</td>
         <td>@transaction.getTypeTrans()</td>
-	<td>@if(transaction.getIdCasier()!=null){<a href="/casier/@transaction.getIdCasier()"> @transaction.getIdCasier() </a>}</td>
+        <td>@if(transaction.getIdCasier()!=null){<a href="/casier/@transaction.getIdCasier()"> @transaction.getIdCasier() </a>}</td>
     </tr>
     }
 </table>

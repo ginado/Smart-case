@@ -1,26 +1,31 @@
 @(casier: Casier,signalements : java.util.List[Transaction])
 
-    @main{
-        <h2>Casier N°@casier.getIdCasier()</h2>
-        <h3>Dimension (H/L): @casier.getHauteur()/@casier.getLargeur()</h3>
-        @if(casier.estPlein()){<p>@casier.getPoids()<p>}else{<p>Vide</p>}
-        <div class="btn-group">
-            <a href="/casier/ouvrir/@casier.getIdCasier()" class="btn btn-default">Ouvrir</a>
-            <a href="/casier/fermer/@casier.getIdCasier()" class="btn btn-default">Fermer</a>
-            <a href="/casier/vider/@casier.getIdCasier()" class="btn btn-default">Remetre a zéro</a>
-        </div>
-        
-        <table class="table table-hover">
-            <tr>
-                <td>Date</td>
-                <td>Auteur</td>
-            </tr>
+@main{
+<h2>Casier N°@casier.getIdCasier()</h2>
+<p>Dimension (hauteur/largeur): @casier.getHauteur()/@casier.getLargeur()</p>
+@if(casier.estPlein()){<p>Poids : @casier.getPoids()<p>}else{<p>Vide</p>}
+    <div class="btn-group">
+        <a href="/casier/ouvrir/@casier.getIdCasier()" class="btn btn-default"><span class="glyphicon glyphicon-log-out"></span></a>
+        <a href="/casier/fermer/@casier.getIdCasier()" class="btn btn-default"><span class="glyphicon glyphicon-unchecked"></span></a>
+        <a href="/casier/mettreajour/@casier.getIdCasier()" class="btn btn-default"><span class="glyphicon glyphicon-floppy-save"></span></a>
+        <a href="/casier/vider/@casier.getIdCasier()" class="btn btn-default"><span class="glyphicon glyphicon-floppy-remove"></span></a>
+    </div>
+
+    <table title ="Liste des signalements pour le casier n°@casier.getIdCasier()" class="table table-hover table-bordered">
+        <tr>
+            <td>Date</td>
+            <td>Auteur</td>
+        </tr>
         @for(signalement <- signalements){
-            <tr>
-                <td>@signalement.getDateTrans()</td>
-                @if(signalement.getUtilisateur()!=null){<td><a href="/utilisateur/@signalement.getUtilisateur()">@signalement.getUtilisateur()</a></td>}else{<td>Anonyme</td>}
-            </tr>
+        <tr>
+            <td>@signalement.getDateTrans()</td>
+            @if(signalement.getUtilisateur()!=null){
+            <td><a href="/utilisateur/@signalement.getUtilisateur()">@signalement.getUtilisateur()</a></td>
+            }else{
+            <td>Anonyme</td>
+            }
+        </tr>
         }
-        </table>
-    }
-        
+    </table>
+}
+

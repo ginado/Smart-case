@@ -25,12 +25,15 @@ import java.util.logging.Logger;
  */
 public class Deposer extends ControllerCommandeArduino{
     public static Result deposer(){
+        
+        //Fetching the lockers
         Collection<Casier> casiers;
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
+        
         //Search for an empty locker
         Casier casierLibre = null;
         Casier casiercourant = null;
@@ -90,6 +93,7 @@ public class Deposer extends ControllerCommandeArduino{
             TransactionDao.ajouterTransaction(new Transaction(0, date,"depot",utilisateur.getAdresseMail(),id));
             CasierDao.remplirCasier(id,poids);
             UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),1);
+	    utilisateur.ajouterCredit(1);
             return ok(views.html.accueil.render(utilisateur,"Votre dépot a bien été pris en compte."));
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));

@@ -38,6 +38,10 @@ public class Utilisateur {
     public Integer getCredit() {
         return credit;
     }
+
+    public void ajouterCredit(Integer i) {
+        credit+=i;
+    }
     
     public String toString() {
         return adresseMail+" "+prenom+" "+nom+" "+credit;

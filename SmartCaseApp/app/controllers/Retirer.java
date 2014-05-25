@@ -32,9 +32,8 @@ List<Casier> casiers;
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
-        Utilisateur utilisateur =null;
         try {
-            utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             if(utilisateur==null || utilisateur.getCredit()<=0) {
                 return ok(views.html.accueil.render(utilisateur,"Vous n'avez pas assez de crédit. Déposez des objets pour augmenter cotre solde de points."));
             }
@@ -82,6 +81,7 @@ List<Casier> casiers;
             TransactionDao.ajouterTransaction(new Transaction(0, date,"retrait",utilisateur.getAdresseMail(),id));
             CasierDao.viderCasier(id);
             UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),-1);
+            utilisateur.ajouterCredit(-1);
             return ok(views.html.accueil.render(utilisateur,"Votre retrait a bien été pris en compte."));
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne : "+ex.getMessage(),"/main"));

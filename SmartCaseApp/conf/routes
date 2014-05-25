@@ -35,10 +35,12 @@ GET    /utilisateurs                controllers.Administrateur.getUsers()
 GET    /ajoutercredit/:idUtilisateur/:nbCredit       controllers.Administrateur.addCredit(idUtilisateur : String, nbCredit : Integer)
 
 GET    /casiers                     controllers.Administrateur.getCasiers()
+GET    /casiers/tri/:tri            controllers.Administrateur.changeComparatorUtilisateurs(tri : Integer)
 GET    /casier/:idCasier            controllers.Administrateur.getCasier(idCasier : String)
 GET    /casier/ouvrir/:idCasier     controllers.Administrateur.ouvrirCasier(idCasier : Integer)
 GET    /casier/fermer/:idCasier     controllers.Administrateur.fermerCasier(idCasier : Integer)
 GET    /casier/vider/:idCasier      controllers.Administrateur.remettreAZero(idCasier : Integer)
+GET    /casier/mettreajour/:idCasier controllers.Administrateur.mettreAJour(idCasier : Integer)
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

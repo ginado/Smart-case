@@ -1,26 +1,27 @@
 @(casiers: java.util.List[Casier])
 
-	@main{
-		<table class="table table-hover table-striped table-bordered">
-			<tr>
-			<td>N°</td>
-			<td>Hauteur</td>
-			<td>Largeur</td>
-			<td>Contenu</td>
-                        <td></td>
-			</tr>
-			
-			@for(casier <- casiers) {
-			
-			<tr>
-			
-			<td>@casier.getIdCasier()</td>
-			<td>@casier.getHauteur()</td>
-			<td>@casier.getLargeur()</td>
-			@if(casier.estPlein()){<td>@casier.getPoids()</td>}else{<td>Vide</td>}
-                        <td><a href="casier/@casier.getIdCasier()" class="btn btn-default">Accéder à sa fiche</a></td>
-			</tr>
-			
-			}
-		</table>
-	}
+@main{
+<table title="Liste des casiers" class="table table-hover table-bordered">
+    <tr>
+        <td>N°</td>
+        <td>Hauteur</td>
+        <td>Largeur</td>
+        <td>Contenu</td>
+        <td></td>
+    </tr>
+    
+    @for(casier <- casiers) {
+    <tr>
+        <td>@casier.getIdCasier()</td>
+        <td>@casier.getHauteur()</td>
+        <td>@casier.getLargeur()</td>
+        @if(casier.estPlein()){
+        <td>@casier.getPoids()</td>
+        }else{
+        <td>Vide</td>
+        }
+        <td><a href="casier/@casier.getIdCasier()" class="btn btn-default">Accéder à sa fiche</a></td>
+    </tr>
+    }
+</table>
+}
