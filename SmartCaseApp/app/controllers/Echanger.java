@@ -27,7 +27,7 @@ public class Echanger extends ControllerCommandeArduino {
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
         Utilisateur utilisateur =null;
         try {
@@ -38,7 +38,7 @@ public class Echanger extends ControllerCommandeArduino {
                 return ok(views.html.choix_casier.render(casiers,"Choisissez le casier avec lequel vous voulez echanger vorte objet.","Échanger","echanger"));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
     }
     
@@ -56,7 +56,7 @@ public class Echanger extends ControllerCommandeArduino {
                 }
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }    
 	return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
     }
@@ -83,11 +83,15 @@ public class Echanger extends ControllerCommandeArduino {
         Utilisateur utilisateur;
         try {
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
-            TransactionDao.ajouterTransaction(new Transaction(0, date,"echange",utilisateur.getAdresseMail(),id));
+            System.out.println(utilisateur);
+            Transaction transaction = new Transaction(0, date,"echange",utilisateur.getAdresseMail(),id);
+            System.out.println(transaction);
+            TransactionDao.ajouterTransaction(transaction);
+            System.out.println(id+"!"+poids);
             CasierDao.remplirCasier(id,poids);
             return ok(views.html.accueil.render(utilisateur,"Votre échange a bien été pris en compte."));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
     }
 }

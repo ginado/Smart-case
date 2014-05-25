@@ -29,7 +29,7 @@ public class Deposer extends ControllerCommandeArduino{
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
         //Search for an empty locker
         Casier casierLibre = null;
@@ -47,7 +47,7 @@ public class Deposer extends ControllerCommandeArduino{
             try {
                 utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             } catch (SQLException ex) {
-                return ok(views.html.error.render("Erreur interne","/main"));
+                return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
             }
             return ok(views.html.accueil.render(utilisateur,"Tous les casiers sont pleins, impossible de déposer un objet."));
         } else {
@@ -92,7 +92,7 @@ public class Deposer extends ControllerCommandeArduino{
             UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),1);
             return ok(views.html.accueil.render(utilisateur,"Votre dépot a bien été pris en compte."));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
     }
 }

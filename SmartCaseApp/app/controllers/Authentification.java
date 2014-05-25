@@ -34,7 +34,7 @@ public class Authentification extends Controller {
             java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
             TransactionDao.ajouterTransaction(new Transaction(0, date,"connexion", utilisateur.getAdresseMail(),-1));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/"));
         } catch (MotDePasseErrone ex) {
             return ok(views.html.index.render(ex.getMessage()));
         } catch (UtilisateurInexistant ex) {

@@ -40,7 +40,7 @@ public class Signaler extends Controller {
                 return ok(views.html.choix_casier.render(casiers,"Choississez le casier dont vous voulez signaler le contenu comme étant nuisible.","Signaler","signaler"));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne",connecte ? "/main" :"/"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),connecte ? "/main" :"/"));
             
         }
     }
@@ -57,7 +57,7 @@ public class Signaler extends Controller {
                 return ok(views.html.accueil.render(utilisateur,"Merci de nous avoir signaler ce contenu."));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne",SessionManager.get("utilisateur")!=null ? "/main" :"/"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),SessionManager.get("utilisateur")!=null ? "/main" :"/"));
         }
     }
     

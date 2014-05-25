@@ -29,7 +29,7 @@ Collection<Casier> casiers;
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
         Utilisateur utilisateur =null;
         try {
@@ -43,7 +43,7 @@ Collection<Casier> casiers;
                 return ok(views.html.choix_casier.render(casiers,"Choisissez le casier dont vous voulez récuperer le contenu","Récuperer","retirer"));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }        
     }
     
@@ -61,7 +61,7 @@ Collection<Casier> casiers;
                 }
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
         return ok(views.html.echanger_retirer.render(utilisateur,casier,false));
     }
@@ -83,7 +83,7 @@ Collection<Casier> casiers;
             UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),-1);
             return ok(views.html.accueil.render(utilisateur,"Votre retrait a bien été pris en compte."));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne","/main"));
+            return ok(views.html.error.render("Erreur interne : "+ex.getMessage(),"/main"));
         }
     }
 }

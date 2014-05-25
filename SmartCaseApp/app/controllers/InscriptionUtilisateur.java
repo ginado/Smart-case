@@ -41,7 +41,7 @@ public class InscriptionUtilisateur extends Controller {
             TransactionDao.ajouterTransaction(new Transaction(0,date,"inscription",utilisateur.getAdresseMail(),-1));
             TransactionDao.ajouterTransaction(new Transaction(0,date,"connexion",utilisateur.getAdresseMail(),-1));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne","/"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/"));
         }
         return redirect("/main");
     }

@@ -25,7 +25,7 @@ public class Logout extends Controller {
             TransactionDao.ajouterTransaction(new Transaction(0, date, "deconnexion", SessionManager.get("utilisateur"),-1));
             SessionManager.closeSession();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/"));
+            return ok(views.html.error.render("Erreur interne : "+ex.getMessage(),"/"));
         }
         return redirect("/");
     }
