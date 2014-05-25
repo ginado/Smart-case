@@ -7,6 +7,8 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
 import models.Utilisateur;
 import play.db.DB;
 
@@ -17,10 +19,8 @@ import play.db.DB;
 public class UtilisateurDAO {
 
     static public Utilisateur getUtilisateur(String adresseMail) throws SQLException {
-        DB db = new DB();
         Connection conn = DB.getConnection();
         Utilisateur user = null;
-
         PreparedStatement st = conn.prepareStatement(
                 "SELECT * FROM Utilisateurs WHERE adresseMail= ?");
         st.setString(1, adresseMail);
@@ -34,6 +34,26 @@ public class UtilisateurDAO {
         }
 
         return user;
+    }
+
+    static public Collection<Utilisateur> getUtilisateurs() throws SQLException {
+        Collection<Utilisateur> utilisateurs = new ArrayList();
+        Connection conn = DB.getConnection();
+        PreparedStatement st = conn.prepareStatement(
+                "SELECT * FROM Utilisateurs");
+        ResultSet rs = st.executeQuery();
+        Utilisateur utilisateur = null;
+        while (rs.next()) {
+            String adresseMail = rs.getString("adresseMail");
+            String prenom = rs.getString("prenom");
+            String nom = rs.getString("nom");
+            String hashPassword = rs.getString("hashPassword");
+            int credit = rs.getInt("credit");
+            utilisateur = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
+            utilisateurs.add(utilisateur);
+        }
+
+        return utilisateurs;
     }
 
     

@@ -18,8 +18,7 @@ import play.db.DB;
 public class TransactionDao {
     
     static public Collection<Transaction> getTransaction() throws SQLException {
-        DB db = new DB();
-        Connection conn = db.getConnection();
+        Connection conn = DB.getConnection();
         ResultSet rsTransaction;
         Collection<Transaction> listeTransaction = new ArrayList();
         Statement st = conn.createStatement();
@@ -50,6 +49,24 @@ public class TransactionDao {
 	st.executeUpdate();
         conn.close();
     }  
+
+    public static Collection<Transaction> getTransactions(String idUser) throws SQLException{
+        Connection conn = DB.getConnection();
+        ResultSet rsTransaction;
+        Collection<Transaction> listeTransaction = new ArrayList();
+        Statement st = conn.createStatement();
+        st.executeQuery("SELECT idTransaction,dateTrans,typeTrans,idCasier FROM transactions WHERE utilisateur='"+idUser+"'");
+        rsTransaction = st.getResultSet();
+        while (rsTransaction.next()) {
+            listeTransaction.add(new Transaction(   rsTransaction.getInt("IdTransaction"),
+                                                    rsTransaction.getDate("dateTrans"),
+                                                    rsTransaction.getString("typeTrans"),
+                                                    idUser,
+                                                    rsTransaction.getInt("idCasier")));
+        }
+        conn.close();
+        return listeTransaction;
+    }
     
     
 }
