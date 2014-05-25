@@ -5,9 +5,9 @@
         <h3>Dimension (H/L): @casier.getHauteur()/@casier.getLargeur()</h3>
         @if(casier.estPlein()){<p>@casier.getPoids()<p>}else{<p>Vide</p>}
         <div class="btn-group">
-            <a href="casier/ouvrir/@casier.getIdCasier()" class="btn btn-default">Ouvrir</a>
-            <a href="casier/fermer/@casier.getIdCasier()" class="btn btn-default">Fermer</a>
-            <a href="casier/vider/@casier.getIdCasier()" class="btn btn-default">Remetre a zéro</a>
+            <a href="/casier/ouvrir/@casier.getIdCasier()" class="btn btn-default">Ouvrir</a>
+            <a href="/casier/fermer/@casier.getIdCasier()" class="btn btn-default">Fermer</a>
+            <a href="/casier/vider/@casier.getIdCasier()" class="btn btn-default">Remetre a zéro</a>
         </div>
         
         <table class="table table-hover">
