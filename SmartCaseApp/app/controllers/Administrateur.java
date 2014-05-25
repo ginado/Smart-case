@@ -198,11 +198,11 @@ public class Administrateur extends ControllerCommandeArduino{
     public static Result mettreAJour(Integer idCasier){
 	    try {
                     int poids =-1;
-		    if(!debugVerrou) {
+		    if(!debugSenseur) {
                         try {
-                            SerialClass.peserCasier(idCasier);
+                            poids=SerialClass.peserCasier(idCasier);
                         } catch (Exception ex) {
-                            return ok(views.html.admin.error.render("Erreur interne de connexion matériel"));
+                            return ok(views.html.admin.error.render("Erreur interne de connexion matériel :" + ex.getMessage()));
                         }
                     }
 		    CasierDao.remplirCasier(idCasier,poids);

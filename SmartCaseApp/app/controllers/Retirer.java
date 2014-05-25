@@ -35,12 +35,12 @@ List<Casier> casiers;
         try {
             Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             if(utilisateur==null || utilisateur.getCredit()<=0) {
-                return ok(views.html.accueil.render(utilisateur,"Vous n'avez pas assez de crédit. Déposez des objets pour augmenter cotre solde de points."));
+                return ok(views.html.accueil.render(utilisateur,"Vous n'avez pas assez de crédits. Déposez des objets pour augmenter votre solde de points."));
             }
             if(Casier.allAreEmpty(casiers)) {
-                return ok(views.html.accueil.render(utilisateur,"Tout les casiers sont vides, impossible de retirer un objet"));
+                return ok(views.html.accueil.render(utilisateur,"Tous les casiers sont vides, impossible de retirer un objet"));
             } else {
-                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier dont vous voulez récuperer le contenu","Récuperer","retirer"));
+                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier dont vous voulez récupérer le contenu","Récupérer","retirer"));
             }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
@@ -70,6 +70,17 @@ List<Casier> casiers;
        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
        Integer id = Integer.parseInt(idCasier);
         try {
+            Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+	    Casier casier = CasierDao.getCasier(idCasier);
+	    if(!debugSenseur){
+	        try {
+		    if(SerialClass.peserCasier(id)>seuil) {
+			return ok(views.html.echanger_retirer.render(utilisateur,casier,false));
+                    }
+		} catch (Exception ex) {
+		    return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
+		}
+	    }
             if(!debugVerrou) {
                 try {
                     SerialClass.fermerCasier(id);
@@ -77,12 +88,11 @@ List<Casier> casiers;
                     return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
                 }
             }
-            Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             TransactionDao.ajouterTransaction(new Transaction(0, date,"retrait",utilisateur.getAdresseMail(),id));
             CasierDao.viderCasier(id);
             UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),-1);
             utilisateur.ajouterCredit(-1);
-            return ok(views.html.accueil.render(utilisateur,"Votre retrait a bien été pris en compte."));
+            return ok(views.html.accueil.render(utilisateur,"Votre retrait a bien été pris en compte. Pensez a fermer la porte !"));
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne : "+ex.getMessage(),"/main"));
         }

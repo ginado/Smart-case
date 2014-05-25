@@ -49,7 +49,7 @@ public class Echanger extends ControllerCommandeArduino {
         try {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
-            if(debugVerrou) {
+            if(!debugVerrou) {
                 try {
                     SerialClass.ouvrirCasier(casier.getIdCasier());
                 } catch (Exception ex) {
@@ -66,30 +66,29 @@ public class Echanger extends ControllerCommandeArduino {
         Integer id = Integer.parseInt(idCasier);
         Integer poids = -1;
         try {
+        Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+        Casier casier = CasierDao.getCasier(idCasier);
+
+
             if (!debugSenseur) {
                 poids = SerialClass.peserCasier(id);
                 if (poids < seuil) {
-                    redirect("/echangerfin/"+idCasier);
+                    return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
                 }
             }
             if(!debugVerrou) {
                         SerialClass.fermerCasier(id);
                 }
-            
-        } catch (Exception exception) {
-            return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
-        }
-        
+
         java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        Utilisateur utilisateur;
-        try {
-            utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             Transaction transaction = new Transaction(0, date,"echange",utilisateur.getAdresseMail(),id);
             TransactionDao.ajouterTransaction(transaction);
             CasierDao.remplirCasier(id,poids);
-            return ok(views.html.accueil.render(utilisateur,"Votre échange a bien été pris en compte."));
+            return ok(views.html.accueil.render(utilisateur,"Votre échange a bien été pris en compte. Pensez a fermer la porte !"));
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
+        } catch (Exception exception) {
+            return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
         }
     }
 }

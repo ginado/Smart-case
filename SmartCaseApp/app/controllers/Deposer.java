@@ -71,17 +71,25 @@ public class Deposer extends ControllerCommandeArduino{
     public static Result deposerFin(){
         Integer id = Integer.parseInt(SessionManager.get("casier"));
         Integer poids = -1;
-        
+        Casier casier;
+	try {
+	    casier = CasierDao.getCasier(SessionManager.get("casier"));
+	} catch (SQLException ex) {
+	    return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
+	}
+
+
         try {
+	    if(!debugSenseur){
+		poids = SerialClass.peserCasier(id);
+		if (poids < seuil) {
+		    return ok(views.html.deposer.render(casier));
+		}
+	    }
             if (!debugVerrou) {
                 SerialClass.fermerCasier(id);
-                if(!debugSenseur){
-                    poids = SerialClass.peserCasier(id);
-                    if (poids < seuil) {
-                        return redirect("/deposerfin/");
-                    }
-                }
             }
+
         } catch (Exception exception) {
             return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
         }
@@ -94,7 +102,7 @@ public class Deposer extends ControllerCommandeArduino{
             CasierDao.remplirCasier(id,poids);
             UtilisateurDAO.ajouterCredit(utilisateur.getAdresseMail(),1);
 	    utilisateur.ajouterCredit(1);
-            return ok(views.html.accueil.render(utilisateur,"Votre dépot a bien été pris en compte."));
+            return ok(views.html.accueil.render(utilisateur,"Votre dépot a bien été pris en compte. Pensez a fermer la porte !"));
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }

@@ -8,9 +8,9 @@ import play.mvc.Controller;
  */
 public abstract class ControllerCommandeArduino extends Controller {
     
-    public static final boolean debugVerrou = true;// true <-> no interaction with the locks
+    public static final boolean debugVerrou = false;// true <-> no interaction with the locks
     public static final boolean debugSenseur = true;// true <-> no interaction with the sensors
     
-    public static final int seuil = 100;// sensor<seuil <-> nothing is on the sensor 
+    public static final int seuil = 280;// sensor<seuil <-> nothing is on the sensor 
     
 }
