@@ -7,6 +7,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import models.Utilisateur;
 import play.db.DB;
 
@@ -17,10 +20,8 @@ import play.db.DB;
 public class UtilisateurDAO {
 
     static public Utilisateur getUtilisateur(String adresseMail) throws SQLException {
-        DB db = new DB();
         Connection conn = DB.getConnection();
         Utilisateur user = null;
-
         PreparedStatement st = conn.prepareStatement(
                 "SELECT * FROM Utilisateurs WHERE adresseMail= ?");
         st.setString(1, adresseMail);
@@ -29,11 +30,31 @@ public class UtilisateurDAO {
             String prenom = rs.getString("prenom");
             String nom = rs.getString("nom");
             String hashPassword = rs.getString("hashPassword");
-            int credit = rs.getInt("credit");
+            Integer credit = rs.getInt("credit");
             user = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
         }
 
         return user;
+    }
+
+    static public List<Utilisateur> getUtilisateurs() throws SQLException {
+        List<Utilisateur> utilisateurs = new ArrayList();
+        Connection conn = DB.getConnection();
+        PreparedStatement st = conn.prepareStatement(
+                "SELECT * FROM Utilisateurs");
+        ResultSet rs = st.executeQuery();
+        Utilisateur utilisateur = null;
+        while (rs.next()) {
+            String adresseMail = rs.getString("adresseMail");
+            String prenom = rs.getString("prenom");
+            String nom = rs.getString("nom");
+            String hashPassword = rs.getString("hashPassword");
+            Integer credit = rs.getInt("credit");
+            utilisateur = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
+            utilisateurs.add(utilisateur);
+        }
+
+        return utilisateurs;
     }
 
     
@@ -54,7 +75,7 @@ public class UtilisateurDAO {
         conn.close();
     }
 
-    public static void ajouterCredit(String utilisateur, int i) throws SQLException {
+    public static void ajouterCredit(String utilisateur, Integer i) throws SQLException {
         Connection conn = DB.getConnection();
         Statement st = conn.createStatement();
         st.executeUpdate("UPDATE Utilisateurs SET credit=credit+"+i+" WHERE adresseMail='"+utilisateur+"'");

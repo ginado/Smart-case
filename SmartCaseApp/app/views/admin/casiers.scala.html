@@ -1,0 +1,24 @@
+@(casiers: java.util.Collection[Casier])
+
+	@main{
+		<table class="table table-hover table-striped table-bordered">
+			<tr>
+			<td>N°</td>
+			<td>Hauteur</td>
+			<td>Largeur</td>
+			<td>Contenu</td>
+			</tr>
+			
+			@for(casier <- casiers) {
+			
+			<tr>
+			
+			<td>@casier.getIdCasier()</td>
+			<td>@casier.getHauteur()</td>
+			<td>@casier.getLargeur()</td>
+			@if(casier.estPlein()){<td>@casier.getPoids()</td>}else{<td>Vide</td>}
+			</tr>
+			
+			}
+		</table>
+	}

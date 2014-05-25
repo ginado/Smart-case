@@ -38,10 +38,10 @@ public class InscriptionUtilisateur extends Controller {
         SessionManager.addSession("utilisateur", utilisateur.getAdresseMail());
         java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
         try {
-            TransactionDao.ajouterTransaction(new Transaction(0,date,"inscription",utilisateur.getAdresseMail(),-1));
-            TransactionDao.ajouterTransaction(new Transaction(0,date,"connexion",utilisateur.getAdresseMail(),-1));
+            TransactionDao.ajouterTransaction(new Transaction(0,date,"inscription",utilisateur.getAdresseMail(),null));
+            TransactionDao.ajouterTransaction(new Transaction(0,date,"connexion",utilisateur.getAdresseMail(),null));
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne","/"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/"));
         }
         return redirect("/main");
     }

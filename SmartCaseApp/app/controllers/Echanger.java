@@ -14,18 +14,21 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
 import utils.SessionManager;
+import arduino.*;
+import java.util.List;
+import static play.mvc.Results.ok;
 
 /**
  *
  * @author bombrunt
  */
-public class Echanger extends Controller {
+public class Echanger extends ControllerCommandeArduino {
     static public Result choisir() {
-        Collection<Casier> casiers;
+        List<Casier> casiers;
         try {
             casiers = CasierDao.getCasiers();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
         Utilisateur utilisateur =null;
         try {
@@ -36,7 +39,7 @@ public class Echanger extends Controller {
                 return ok(views.html.choix_casier.render(casiers,"Choisissez le casier avec lequel vous voulez echanger vorte objet.","Échanger","echanger"));
             }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
         }
     }
     
@@ -46,21 +49,50 @@ public class Echanger extends Controller {
         try {
             casier = CasierDao.getCasier(idCasier);
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            if(debugVerrou) {
+                try {
+                    SerialClass.ouvrirCasier(casier.getIdCasier());
+                } catch (Exception ex) {
+                    return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
+                }
+            }
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
-        }
-        return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
+        }    
+	return ok(views.html.echanger_retirer.render(utilisateur,casier,true));
     }
     
     static public Result echangerFin(String idCasier) {
-        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
-        int id = Integer.parseInt(idCasier);
+        Integer id = Integer.parseInt(idCasier);
+        Integer poids = -1;
         try {
-            TransactionDao.ajouterTransaction(new Transaction(0, date,"echange",SessionManager.get("utilisateur"),id));
-            CasierDao.remplirCasier(id,200);
-        } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/main"));
+            if (!debugSenseur) {
+                poids = SerialClass.peserCasier(id);
+                if (poids < seuil) {
+                    redirect("/echangerfin/"+idCasier);
+                }
+            }
+            if(!debugVerrou) {
+                        SerialClass.fermerCasier(id);
+                }
+            
+        } catch (Exception exception) {
+            return ok(views.html.error.render("Erreur interne de connexion matériel","/main"));
         }
-        return redirect("/main");
+        
+        java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
+        Utilisateur utilisateur;
+        try {
+            utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
+            System.out.println(utilisateur);
+            Transaction transaction = new Transaction(0, date,"echange",utilisateur.getAdresseMail(),id);
+            System.out.println(transaction);
+            TransactionDao.ajouterTransaction(transaction);
+            System.out.println(id+"!"+poids);
+            CasierDao.remplirCasier(id,poids);
+            return ok(views.html.accueil.render(utilisateur,"Votre échange a bien été pris en compte."));
+        } catch (SQLException ex) {
+            return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));
+        }
     }
 }

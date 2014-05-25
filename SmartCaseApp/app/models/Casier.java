@@ -8,13 +8,13 @@ import java.util.Iterator;
  * @author bombrunt
  */
 public class Casier {
-    private int idCasier;
-    private int largeur;
-    private int hauteur;
+    private Integer idCasier;
+    private Integer largeur;
+    private Integer hauteur;
     private boolean estPlein;
-    private int poids;
+    private Integer poids;
 
-    public Casier(int idCasier, int largeur, int hauteur, boolean estPlein, int poids) {
+    public Casier(Integer idCasier, Integer largeur, Integer hauteur, boolean estPlein, Integer poids) {
         this.idCasier = idCasier;
         this.largeur = largeur;
         this.hauteur = hauteur;
@@ -22,15 +22,15 @@ public class Casier {
         this.poids = poids;
     }
 
-    public int getIdCasier() {
+    public Integer getIdCasier() {
         return idCasier;
     }
 
-    public int getLargeur() {
+    public Integer getLargeur() {
         return largeur;
     }
 
-    public int getHauteur() {
+    public Integer getHauteur() {
         return hauteur;
     }
 
@@ -38,7 +38,7 @@ public class Casier {
         return estPlein;
     }
 
-    public int getPoids() {
+    public Integer getPoids() {
         return poids;
     }
     

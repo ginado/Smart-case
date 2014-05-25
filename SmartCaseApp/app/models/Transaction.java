@@ -1,7 +1,7 @@
 package models;
 
 import java.sql.Date;
-
+import java.util.Comparator;
 /**
  *
  * @author bombrunt
@@ -10,13 +10,13 @@ import java.sql.Date;
 
 
 public class Transaction {
-    private int idTransaction;
+    private Integer idTransaction;
     private Date dateTrans;
     private TypeTransaction typeTrans;
     private String utilisateur;
-    private int idCasier;
+    private Integer idCasier;
 
-    public Transaction(int idTransaction, Date dateTrans, String typeTrans, String utilisateur, int idCasier) {
+    public Transaction(Integer idTransaction, Date dateTrans, String typeTrans, String utilisateur, Integer idCasier) {
         this.idTransaction = idTransaction;
         this.dateTrans = dateTrans;
         this.typeTrans = TypeTransaction.valueOf(typeTrans.toUpperCase().trim());
@@ -24,7 +24,7 @@ public class Transaction {
         this.idCasier = idCasier;
     }
 
-    public int getIdTransaction() {
+    public Integer getIdTransaction() {
         return idTransaction;
     }
 
@@ -40,10 +40,15 @@ public class Transaction {
         return utilisateur;
     }
 
-    public int getIdCasier() {
+    public Integer getIdCasier() {
         return idCasier;
     }
-    
+
+    public static class ChronologicalComparator implements Comparator<Transaction> {
+	public int compare(Transaction t1, Transaction t2) {
+		return (t1.getDateTrans()).compareTo(t2.getDateTrans());
+	}
+    }
     @Override
     public String toString(){
         return "Transaction n° : "+idTransaction+

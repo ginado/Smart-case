@@ -1,18 +1,35 @@
 @(utilisateur : Utilisateur,message : String)
 
-@main("Smart Case") {
-<a href="/logout" class="btn">Se déconnecter</a>
-
-<h1>Bonjour @utilisateur.getPrenom() !</h1>
-<p>Vous avez @utilisateur.getCredit() crédits.</p>
-<p>@message</p>
-
-<div class="btn-group">
-    <a href="/echangerchoix" class="btn btn-default btn-xlarge active" role="button">Echanger un objet</a>
-
-    <a href="/retirerchoix" class="btn btn-default btn-xlarge active" role="button">Retirer un objet</a>
-
-    <a href="/deposer" class="btn btn-default btn-xlarge active" role="button">Deposer un objet</a>
-</div>
-
+@main{
+        
+        
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <a id="titleLink" class="navbar-brand" href="/">Smart Case</a>
+                </div>
+                <div class="navbar-collapse collapse">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><a href ="/main" class="btn">Home</a></li>
+                        <li><a href="/logout" class="btn">Se déconnecter</a></li>
+                        <li><a href="/signalerchoix" class="btn">Signaler un contenu innaproprié</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+        <h1 class="text-center">Bonjour @utilisateur.getPrenom() !</h1>
+        <p class="text-center">Vous avez @utilisateur.getCredit() crédits.</p>
+        <p class="text-center">@message</p>
+        
+        <div class="btn-group btn-group-justified">
+            <a href="/echangerchoix" class="btn btn-default btn-xl">Echanger un objet</a>
+            
+            <a href="/retirerchoix" class="btn btn-default btn-xl">Retirer un objet</a>
+            
+            <a href="/deposer" class="btn btn-default btn-xl">Deposer un objet</a>
+        </div>
+        
 }

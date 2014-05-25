@@ -1,0 +1,26 @@
+@(utilisateurs: java.util.Collection[Utilisateur])
+
+	@main{
+		<table class="table table-hover table-striped table-bordered">
+			<tr>
+			<td>Prénom</td>
+			<td>Nom</td>
+			<td>Email</td>
+			<td>Crédit</td>
+			<td></td>
+			</tr>
+			
+			@for(utilisateur <- utilisateurs) {
+			
+			<tr>
+			
+			<td>@utilisateur.getPrenom()</td>
+			<td>@utilisateur.getNom()</td>
+			<td>@utilisateur.getAdresseMail()</td>
+			<td>@utilisateur.getCredit()</td>
+		    <td><a href="/utilisateur/@utilisateur.getAdresseMail()">Acceder a sa fiche</a></td>
+			</tr>
+			
+			}
+		</table>
+	}

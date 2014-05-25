@@ -1,0 +1,36 @@
+@(corps : Html) {
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Smart Case Administration</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+            
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+            
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    </head>
+    <body>
+        
+        
+        <div class="navbar navbar-default" role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <div class="navbar-brand">Smart Case Administrateur</div>
+                </div>
+                
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li><a href="/utilisateurs">Utilisateurs</a></li>
+                        <li><a href="/casiers">Casiers</a></li>
+                    </ul>
+                </div>
+        </div>
+            
+        @corps
+            
+    </body>
+</html>
+}

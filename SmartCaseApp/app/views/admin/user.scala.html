@@ -1,0 +1,29 @@
+@(utilisateur: Utilisateur,transactions : java.util.Collection[Transaction])
+        
+@main{
+<h2>@utilisateur.getPrenom() @utilisateur.getNom()</h2>
+<h3>@utilisateur.getAdresseMail()</h3>
+<div class="btn-group">
+  <button class="btn btn-default">Crédits : @utilisateur.getCredit()</button>
+  @if(utilisateur.getCredit()>=10){
+        <a href="/ajoutercredit/@utilisateur.getAdresseMail/-10"  class="btn btn-default">-10</a>
+  } else {
+        <a href="/ajoutercredit/@utilisateur.getAdresseMail/-10"  class="btn btn-default disabled">-10</a>
+  }
+  @if(utilisateur.getCredit()>=1){
+        <a href="/ajoutercredit/@utilisateur.getAdresseMail/-1"  class="btn btn-default">-1</a>
+  } else {
+        <a href="/ajoutercredit/@utilisateur.getAdresseMail/-1"  class="btn btn-default disabled">-1</a>
+  }
+  <a href="/ajoutercredit/@utilisateur.getAdresseMail/1"  class="btn btn-default">+1</a>
+  <a href="/ajoutercredit/@utilisateur.getAdresseMail/10" class="btn btn-default">+10</a>
+</div>
+
+<ul>
+    @for(transaction <- transactions){
+    <li>
+        @transaction.toString()
+    </li>
+    }
+</ul>
+}

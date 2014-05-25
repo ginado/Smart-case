@@ -12,11 +12,12 @@ public class SerialClassTest {
     public void testConnection() {
 	SerialClass testSC = new SerialClass();
 	try{
-	    testSC.initialize();
-	    testSC.close();
+          String sortie=testSC.sendCommand("x");
+          System.out.println(sortie);
 	} catch (Exception e) {
 	    fail(e.getMessage());
 	}
+
     }
 
     /*		@Test

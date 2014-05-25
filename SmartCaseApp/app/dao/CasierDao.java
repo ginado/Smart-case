@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.PreparedStatement;
 import java.util.ArrayList;
 import java.util.List;
 import models.Casier;
@@ -38,20 +39,23 @@ public class CasierDao {
         return listeCasier;
     }
     
-    static public void remplirCasier(int idCasier,int poids) throws SQLException{
+    static public void remplirCasier(Integer idCasier,Integer poids) throws SQLException{
         DB db = new DB();
         Connection conn = db.getConnection();
-        Statement st = conn.createStatement();
-        st.executeUpdate("UPDATE casiers SET estPlein=1, poids="+poids+" WHERE idCasier='" + idCasier +"'");
+        PreparedStatement st = conn.prepareStatement("UPDATE casiers SET estPlein=1, poids=? WHERE idCasier=?");
+        st.setInt(1,idCasier);
+        st.setInt(2,poids);
+        st.executeUpdate();
         conn.close();
     }
     
     
-    static public void viderCasier(int idCasier) throws SQLException{
+    static public void viderCasier(Integer idCasier) throws SQLException{
         DB db = new DB();
         Connection conn = db.getConnection();
-        Statement st = conn.createStatement();
-        st.executeUpdate("UPDATE casiers SET estPlein=0, poids=0 WHERE idCasier='" + idCasier +"'");
+        PreparedStatement st = conn.prepareStatement("UPDATE casiers SET estPlein=0, poids=0 WHERE idCasier=?");
+        st.setInt(1,idCasier);
+        st.executeUpdate();
         conn.close();
     }
     

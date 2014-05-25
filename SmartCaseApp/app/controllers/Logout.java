@@ -22,10 +22,10 @@ public class Logout extends Controller {
     public static Result logout(){
         java.sql.Date date = new Date(Calendar.getInstance().getTimeInMillis());
         try {
-            TransactionDao.ajouterTransaction(new Transaction(0, date, "deconnexion", SessionManager.get("utilisateur"),-1));
+            TransactionDao.ajouterTransaction(new Transaction(0, date, "deconnexion", SessionManager.get("utilisateur"),null));
             SessionManager.closeSession();
         } catch (SQLException ex) {
-            return ok(views.html.error.render("Erreur interne.","/"));
+            return ok(views.html.error.render("Erreur interne : "+ex.getMessage(),"/"));
         }
         return redirect("/");
     }

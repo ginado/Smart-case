@@ -1,31 +1,22 @@
-@(title: String)(content: Html)
-
+@(corps : Html)
 <!DOCTYPE html>
 <html>
-<head>
-    <title>Smart Case</title>
-    <link rel='shortcut icon' type='image/png' href='@routes.Assets.at("images/favicon.png")'>
-    <link rel='stylesheet' href='@routes.WebJarAssets.at(WebJarAssets.locate("bootstrap.min.css"))'>
-    <link rel='stylesheet' href='@routes.Assets.at("stylesheets/index.css")'>
-    <script type='text/javascript' src='@routes.WebJarAssets.at(WebJarAssets.locate("jquery.min.js"))'></script>
-</head>
-<body>
-
-    <div class="navbar navbar-fixed-top">
-        <div class="navbar-inner">
-            <div class="container-fluid">
-                <a id="titleLink" class="brand" href="/">@title</a>
-                <a href="/signalerchoix" class="btn" id="signalerId">Signaler un contenu innaproprié</a>
-                
-            </div>
-        </div>
-    </div>
-
-   <div class="container" >
-   
-        @content
-
-	
-    </div>
-</body>
+    <head>
+        <title>Smart Case</title>
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap-theme.min.css">
+    
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    
+        <link rel='stylesheet' href='@routes.Assets.at("stylesheets/index.css")'>
+    </head>
+    <body>
+        
+        @corps
+        
+    </body>
 </html>
