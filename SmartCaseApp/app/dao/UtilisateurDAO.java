@@ -33,7 +33,7 @@ public class UtilisateurDAO {
             Integer credit = rs.getInt("credit");
             user = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
         }
-
+	conn.close();
         return user;
     }
 
@@ -53,7 +53,7 @@ public class UtilisateurDAO {
             utilisateur = new Utilisateur(adresseMail, prenom, nom, hashPassword, credit);
             utilisateurs.add(utilisateur);
         }
-
+	conn.close();
         return utilisateurs;
     }
 

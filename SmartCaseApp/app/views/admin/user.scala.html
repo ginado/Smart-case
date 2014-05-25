@@ -1,4 +1,4 @@
-@(utilisateur: Utilisateur,transactions : java.util.Collection[Transaction])
+@(utilisateur: Utilisateur,transactions : java.util.List[Transaction])
         
 @main{
 <h2>@utilisateur.getPrenom() @utilisateur.getNom()</h2>
@@ -19,11 +19,20 @@
   <a href="/ajoutercredit/@utilisateur.getAdresseMail/10" class="btn btn-default">+10</a>
 </div>
 
-<ul>
+<table class="table table-hover table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Date</th>
+        <th>Type</th>
+        <th>N° Casier</th>
+    </tr>
     @for(transaction <- transactions){
-    <li>
-        @transaction.toString()
-    </li>
+    <tr>
+        <td>@transaction.getIdTransaction()</td>
+        <td>@transaction.getDateTrans()</td>
+        <td>@transaction.getTypeTrans()</td>
+	<td>@if(transaction.getIdCasier()!=null){<a href="/casier/@transaction.getIdCasier()"> @transaction.getIdCasier() </a>}</td>
+    </tr>
     }
-</ul>
+</table>
 }

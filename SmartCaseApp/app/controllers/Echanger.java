@@ -84,11 +84,8 @@ public class Echanger extends ControllerCommandeArduino {
         Utilisateur utilisateur;
         try {
             utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
-            System.out.println(utilisateur);
             Transaction transaction = new Transaction(0, date,"echange",utilisateur.getAdresseMail(),id);
-            System.out.println(transaction);
             TransactionDao.ajouterTransaction(transaction);
-            System.out.println(id+"!"+poids);
             CasierDao.remplirCasier(id,poids);
             return ok(views.html.accueil.render(utilisateur,"Votre échange a bien été pris en compte."));
         } catch (SQLException ex) {

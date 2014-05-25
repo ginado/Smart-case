@@ -4,10 +4,13 @@ import dao.TransactionDao;
 import dao.UtilisateurDAO;
 import dao.CasierDao;
 import java.sql.SQLException;
-import java.util.Collection;
+import models.TypeTransaction;
+import java.util.Collections;
+import java.util.List;
 import models.Transaction;
 import models.Utilisateur;
 import models.Casier;
+import models.Transaction.ChronologicalComparator;
 import play.mvc.Controller;
 import play.mvc.Result;
 import static play.mvc.Results.ok;
@@ -22,7 +25,8 @@ public class Administrateur extends Controller{
         try {
             Utilisateur user = UtilisateurDAO.getUtilisateur(idUser);
             if(user!=null) {
-                Collection<Transaction> transactions = TransactionDao.getTransactions(idUser);
+                List<Transaction> transactions = TransactionDao.getTransactions(idUser);
+		Collections.sort(transactions,new ChronologicalComparator());
                 return ok(views.html.admin.user.render(user,transactions));
             } else {
                 return ok(views.html.admin.error.render("Aucun utilisateur d'adresse mail "+idUser+"."));
@@ -34,7 +38,7 @@ public class Administrateur extends Controller{
 
     public static Result getUsers(){
         try {
-            Collection<Utilisateur> users = UtilisateurDAO.getUtilisateurs();
+            List<Utilisateur> users = UtilisateurDAO.getUtilisateurs();
             return ok(views.html.admin.users.render(users));
         } catch (SQLException ex) {
             return ok(views.html.admin.error.render("Erreur interne :"+ex.getMessage())); 
@@ -53,13 +57,23 @@ public class Administrateur extends Controller{
     
     public static Result getCasiers(){
         try {
-            Collection<Casier> casiers = CasierDao.getCasiers();
+            List<Casier> casiers = CasierDao.getCasiers();
             return ok(views.html.admin.casiers.render(casiers));
         } catch (SQLException ex) {
             return ok(views.html.admin.error.render("Erreur interne :"+ex.getMessage())); 
         }
     }
     
+    public static Result getCasier(String idCasier){
+        try {
+            Casier casier = CasierDao.getCasier(idCasier);
+            List<Transaction> signalements = TransactionDao.getTransactions(idCasier,TypeTransaction.SIGNALER);
+	    Collections.sort(signalements,new ChronologicalComparator());
+            return ok(views.html.admin.casier.render(casier,signalements));
+        } catch (SQLException ex) {
+            return ok(views.html.admin.error.render("Erreur interne :"+ex.getMessage()));
+        }
+    }
 
     
 }

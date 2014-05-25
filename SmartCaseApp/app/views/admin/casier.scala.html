@@ -1,24 +1,26 @@
-@(casiers: java.util.Collection[Casier])
+@(casier: Casier,signalements : java.util.List[Transaction])
 
-	@main{
-		<table class="table table-hover table-striped table-bordered">
-			<tr>
-			<td>N°</td>
-			<td>Hauteur</td>
-			<td>Largeur</td>
-			<td>Contenu</td>
-			</tr>
-			
-			@for(casier <- casiers) {
-			
-			<tr>
-			
-			<td>@casier.getIdCasier()</td>
-			<td>@casier.getHauteur()</td>
-			<td>@casier.getLargeur()</td>
-			@if(casier.estPlein()){<td>@casier.getPoids()</td>}else{<td>Vide</td>}
-			</tr>
-			
-			}
-		</table>
-	}
+    @main{
+        <h2>Casier N°@casier.getIdCasier()</h2>
+        <h3>Dimension (H/L): @casier.getHauteur()/@casier.getLargeur()</h3>
+        @if(casier.estPlein()){<p>@casier.getPoids()<p>}else{<p>Vide</p>}
+        <div class="btn-group">
+            <a href="casier/ouvrir/@casier.getIdCasier()" class="btn btn-default">Ouvrir</a>
+            <a href="casier/fermer/@casier.getIdCasier()" class="btn btn-default">Fermer</a>
+            <a href="casier/vider/@casier.getIdCasier()" class="btn btn-default">Remetre a zéro</a>
+        </div>
+        
+        <table class="table table-hover">
+            <tr>
+                <td>Date</td>
+                <td>Auteur</td>
+            </tr>
+        @for(signalement <- signalements){
+            <tr>
+                <td>@signalement.getDateTrans()</td>
+                @if(signalement.getUtilisateur()!=null){<td><a href="/utilisateur/@signalement.getUtilisateur()">@signalement.getUtilisateur()</a></td>}else{<td>Anonyme</td>}
+            </tr>
+        }
+        </table>
+    }
+        

@@ -65,11 +65,15 @@ public class TransactionDao {
         st.executeQuery("SELECT idTransaction,dateTrans,typeTrans,idCasier FROM transactions WHERE utilisateur='"+idUser+"'");
         rsTransaction = st.getResultSet();
         while (rsTransaction.next()) {
+            	    Integer idCasier = rsTransaction.getInt("idCasier");
+	    if(rsTransaction.wasNull()) {
+	        idCasier=null;
+            }
             listeTransaction.add(new Transaction(   rsTransaction.getInt("IdTransaction"),
                                                     rsTransaction.getDate("dateTrans"),
                                                     rsTransaction.getString("typeTrans"),
                                                     idUser,
-                                                    rsTransaction.getInt("idCasier")));
+                                                    idCasier));
         }
         conn.close();
         return listeTransaction;
@@ -79,12 +83,9 @@ public class TransactionDao {
         Connection conn = DB.getConnection();
         ResultSet rsTransaction;
     	List<Transaction> listeTransaction = new ArrayList();
-        PreparedStatement st = conn.prepareStatement("SELECT idTransaction,dateTrans,utilisateur FROM transactions WHERE typeTrans=? AND idCasier=?");
-        st.setString(1,typeTransaction.name().toLowerCase());
-	st.setInt(2,Integer.parseInt(idCasier));
-	st.executeQuery();
+        Statement st = conn.createStatement();
+        st.executeUpdate("SELECT idTransaction,dateTrans,utilisateur FROM transactions WHERE typeTrans='"+typeTransaction.name().toLowerCase()+"' AND idCasier="+idCasier);
 	rsTransaction = st.getResultSet();
-        System.out.println(st.toString());
         while (rsTransaction.next()) {
             listeTransaction.add(new Transaction(   rsTransaction.getInt("IdTransaction"),
                                                     rsTransaction.getDate("dateTrans"),
