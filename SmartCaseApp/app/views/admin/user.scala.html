@@ -9,19 +9,19 @@
     } else {
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-10"  class="btn btn-default disabled">-10</a>
     }
-    <button class="btn disabled">Crédits : @utilisateur.getCredit()</button>
     @if(utilisateur.getCredit()>=1){
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-1"  class="btn btn-default">-1</a>
     } else {
         <a href="/ajoutercredit/@utilisateur.getAdresseMail/-1"  class="btn btn-default disabled">-1</a>
     }
-    
+    <button class="btn disabled">Crédits : @utilisateur.getCredit()</button>
     <a href="/ajoutercredit/@utilisateur.getAdresseMail/1"  class="btn btn-default">+1</a>
     <a href="/ajoutercredit/@utilisateur.getAdresseMail/10" class="btn btn-default">+10</a>
     
 </div>
 
-<table title="Liste des interactions de @utilisateur.getPrenom() @utilisateur.getNom()" class="table table-hover table-bordered">
+<table class="table table-hover table-bordered">
+<caption class="text-left">Liste des interactions de @utilisateur.getPrenom() @utilisateur.getNom()</caption>
     <tr>
         <th>Identificateur</th>
         <th>Date</th>

@@ -21,15 +21,15 @@
         
         
         <h1 class="text-center">Bonjour @utilisateur.getPrenom() !</h1>
-        <p class="text-center">Vous avez @utilisateur.getCredit() crédits.</p>
+        <p class="text-center">Vous avez @utilisateur.getCredit() crédit@if(utilisateur.getCredit()!=1){s}.</p>
         <p class="text-center">@message</p>
         
         <div class="btn-group btn-group-justified">
-            <a href="/echangerchoix" class="btn btn-default btn-xl">Echanger un objet</a>
+            <a href="/echangerchoix" class="btn btn-default btn-xl">Échanger un objet</a>
             
             <a href="/retirerchoix" class="btn btn-default btn-xl">Retirer un objet</a>
             
-            <a href="/deposer" class="btn btn-default btn-xl">Deposer un objet</a>
+            <a href="/deposer" class="btn btn-default btn-xl">Déposer un objet</a>
         </div>
         
 }

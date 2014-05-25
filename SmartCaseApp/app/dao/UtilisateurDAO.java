@@ -63,7 +63,7 @@ public class UtilisateurDAO {
         if(user==null) {
             throw new UtilisateurInexistant("Aucun utilisateur d'addresse mail : "+adresseMail);
         } else if (!hashPassword.equals(user.getHashPassword())) {
-            throw new MotDePasseErrone("Mauvais mot de passe pour :"+adresseMail);
+            throw new MotDePasseErrone("Mauvais mot de passe pour : "+adresseMail);
         }
         return user;        
     }

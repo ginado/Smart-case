@@ -33,12 +33,12 @@ public class Signaler extends Controller {
             List<Casier> casiers = CasierDao.getCasiers();
             if(Casier.allAreEmpty(casiers)) {
                 if(connecte) {
-                    return ok(views.html.accueil.render(UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur")),"Tout les casiers sont vides."));
+                    return ok(views.html.accueil.render(UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur")),"Tous les casiers sont vides."));
                 } else {
-                    return ok(views.html.index.render("Tout les casiers sont vides."));
+                    return ok(views.html.index.render("Tous les casiers sont vides."));
                 }
             } else {
-                return ok(views.html.choix_casier.render(casiers,"Choississez le casier dont vous voulez signaler le contenu comme étant nuisible.","Signaler","signaler"));
+                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier dont vous voulez signaler le contenu comme étant nuisible.","Signaler","signaler"));
             }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),connecte ? "/main" :"/"));
@@ -53,9 +53,9 @@ public class Signaler extends Controller {
             Utilisateur utilisateur = UtilisateurDAO.getUtilisateur(SessionManager.get("utilisateur"));
             TransactionDao.ajouterTransaction(new Transaction(0, date, "signaler", SessionManager.get("utilisateur"), Integer.parseInt(idCasier)));
             if(utilisateur==null) {
-                return ok(views.html.index.render("Merci de nous avoir signaler ce contenu."));
+                return ok(views.html.index.render("Merci de nous avoir signalé ce contenu."));
             } else {
-                return ok(views.html.accueil.render(utilisateur,"Merci de nous avoir signaler ce contenu."));
+                return ok(views.html.accueil.render(utilisateur,"Merci de nous avoir signalé ce contenu."));
             }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),SessionManager.get("utilisateur")!=null ? "/main" :"/"));

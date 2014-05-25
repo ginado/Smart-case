@@ -1,7 +1,8 @@
 @(utilisateurs: java.util.List[Utilisateur])
 
 @main{
-<table title="Liste des utilisateurs" class="table table-hover table-bordered">
+<table class="table table-hover table-bordered">
+<caption class="text-left">Liste des utilisateurs</caption>
     <tr>
         <td>Prénom <a href="/casiers/tri/0"><span class="glyphicon glyphicon-chevron-up"></span></a><a href="/casiers/tri/1"><span class="glyphicon glyphicon-chevron-down"></span></a></td>
         <td>Nom <a href="/casiers/tri/2"><span class="glyphicon glyphicon-chevron-up"></a> <a href="/casiers/tri/3"><span class="glyphicon glyphicon-chevron-down"></span></a> </td>
@@ -16,7 +17,7 @@
         <td>@utilisateur.getNom()</td>
         <td>@utilisateur.getAdresseMail()</td>
         <td>@utilisateur.getCredit()</td>
-        <td><a href="/utilisateur/@utilisateur.getAdresseMail()">Accéder à sa fiche</a></td>
+        <td><a class="btn btn-default" href="/utilisateur/@utilisateur.getAdresseMail()">Accéder à sa fiche</a></td>
     </tr>
     }
 </table>

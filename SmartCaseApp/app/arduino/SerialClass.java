@@ -44,6 +44,6 @@ public class SerialClass {
 	if (output.equals("KO")){
 		throw new Exception("Erreur avec l'arduino lors du pesage du casier du casier");
 	}
-	return Integer.parseInt(output);
+	return Integer.parseInt(output.trim());
     }
 }
