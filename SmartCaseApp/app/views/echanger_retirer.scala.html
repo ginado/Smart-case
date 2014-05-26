@@ -17,7 +17,8 @@
                 </div>
             </div>
         </div>
-        <p class="text-center">Vous pouvez maintenant @if(isEchange){échanger votre objet avec}else{récupérer} l'objet dans le casier n°@casier.getIdCasier().</p>
-            </br>
-        <a class="text-center" href='/@if(isEchange){echanger}else{retirer}fin/@casier.getIdCasier()' class="btn btn-default btn-xl">C'est fait !</a> 
+        <p class="text-center">
+		Vous pouvez maintenant @if(isEchange){échanger votre objet avec}else{récupérer} l'objet dans le casier n°@casier.getIdCasier().
+            	</br> <a href='/@if(isEchange){echanger}else{retirer}fin/@casier.getIdCasier()' class="btn btn-default btn-xl">C'est fait !</a>
+	</p> 
 }

@@ -22,13 +22,18 @@
           Voulez vous <a href="/deposer">déposer</a> un objet ?</p>
       } else {
       <p class="text-center">@descriptionChoix</p>
+	<table>
+	  <tr>
           @for(casier <- casiers){
-
-              @if(casier.estPlein()) {
-              <a href="/@destination/@casier.getIdCasier()" class="btn btn-default btn-casier">@verbeAction N°@casier.getIdCasier()</a>
+              <td>@if(casier.estPlein()) {
+              <a href="/@destination/@casier.getIdCasier()" class="btn btn-default btn-block btn-casier">@verbeAction N°@casier.getIdCasier()</a>
               } else {
-              <button class="btn btn-default btn-casier btn-danger">@verbeAction N°@casier.getIdCasier()</button>
-              }
+              <button class="btn btn-default btn-block btn-casier btn-danger">@verbeAction N°@casier.getIdCasier()</button>
+              }</td>
+	      @if((casier.getIdCasier()+1)%4==0){</tr>
+	      <tr>}
           }
+	  </tr>
+	</table>
     }
 }

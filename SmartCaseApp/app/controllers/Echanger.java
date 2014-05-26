@@ -36,7 +36,7 @@ public class Echanger extends ControllerCommandeArduino {
             if(Casier.allAreEmpty(casiers)) {
                 return ok(views.html.accueil.render(utilisateur,"Tout les casiers sont vides, impossible d'échanger un objet"));
             } else {
-                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier avec lequel vous voulez echanger vorte objet.","Échanger","echanger"));
+                return ok(views.html.choix_casier.render(casiers,"Choisissez le casier avec lequel vous voulez echanger votre objet.","Échanger","echanger"));
             }
         } catch (SQLException ex) {
             return ok(views.html.error.render("Erreur interne :"+ex.getMessage(),"/main"));

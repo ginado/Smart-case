@@ -3,13 +3,13 @@ a:hover {
 }
 
 .btn-xl {
-    padding: 60px 60px;
+    padding: 60px;
     font-size : 40px;
 }
 
 .btn-casier {
-    padding: 48px 48px;
-    font-size : 32px;
+    padding: 20px;
+    font-size : 44px;
 }
 
 .form-group {
